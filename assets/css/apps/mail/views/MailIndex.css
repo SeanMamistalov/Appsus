@@ -4,20 +4,6 @@ body {
   background-color: #fff;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  padding: 8px 16px;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 18px;
-  color: #202124;
-}
-
 .sidebar {
   width: 240px;
   background-color: #fff;
@@ -59,4 +45,8 @@ body {
 .email-time {
   margin-left: auto;
   color: #5f6368;
+}
+
+header .gmail-logo{
+  width: 100px;
 }

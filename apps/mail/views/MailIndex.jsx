@@ -5,7 +5,7 @@ export function MailIndex() {
     <div>
       <header>
         <span className="material-icons">menu</span>
-        <h1>Gmail Clone</h1>
+        <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
       </header>
       <div className="sidebar">
         <div className="sidebar-item inbox">
