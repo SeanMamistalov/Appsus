@@ -1,1 +1,19 @@
- /* note index */
+.sidebar-keep {
+    width: 240px;
+    background-color: #fff;
+    border-right: 3px solid #ddd;
+    padding: 16px;
+}
+
+.sidebar-keep:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.sidebar-keep:hover .material-icons {
+    color: #FFEB3B;
+}
+
+.keep-logo {
+    width: 50px;
+}
