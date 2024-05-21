@@ -1,5 +1,3 @@
-import "../../../assets/css/apps/mail/views/MailIndex.css";
-
 export function MailIndex() {
   return (
     <div>
@@ -7,7 +5,7 @@ export function MailIndex() {
         <span className="material-icons">menu</span>
         <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
       </header>
-      <div className="sidebar">
+      <div className="sidebar-gmail">
         <div className="sidebar-item inbox">
           <span className="material-icons">inbox</span> Inbox
         </div>
