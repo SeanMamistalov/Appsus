@@ -22,25 +22,6 @@ export function MailIndex() {
           <span className="material-icons">drafts</span> Drafts
         </div>
       </div>
-      <main>
-        <h2>Inbox</h2>
-        <div className="email-item">
-          <div className="email-sender">John Doe</div>
-          <div className="email-subject">Meeting Reminder</div>
-          <div className="email-time">10:00 AM</div>
-        </div>
-        <div className="email-item">
-          <div className="email-sender">Jane Smith</div>
-          <div className="email-subject">Project Updates</div>
-          <div className="email-time">Yesterday</div>
-        </div>
-      </main>
-      <section>
-        <h2>Trash</h2>
-      </section>
-      <section>
-        <h2>Drafts</h2>
-      </section>
     </div>
   );
 }
