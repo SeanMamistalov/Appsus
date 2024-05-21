@@ -1,1 +1,62 @@
- /* mail index  */
+body {
+  font-family: "Google Sans", "Roboto", sans-serif;
+  margin: 0;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 16px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 18px;
+  color: #202124;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #fff;
+  border-right: 3px solid #ddd;
+  padding: 16px;
+}
+
+.sidebar-item:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.sidebar-item:hover .material-icons {
+  color: #1a73e8;
+}
+
+.email-item {
+  border-bottom: 1px solid #ddd;
+  padding: 12px 0;
+}
+.email-item:hover {
+  background-color: #f0f0f0;
+}
+
+.email-item:last-child {
+  border-bottom: none;
+}
+
+.email-sender {
+  font-weight: bold;
+  color: #202124;
+}
+
+.email-subject {
+  margin-left: 8px;
+  color: #5f6368;
+}
+
+.email-time {
+  margin-left: auto;
+  color: #5f6368;
+}
