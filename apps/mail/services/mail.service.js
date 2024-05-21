@@ -2,7 +2,6 @@ import { storageService } from "../../../services/async-storage.service";
 
 const MAIL_KEY = 'emailDB';
 
-
 const emailService = {
     query,
     get,
@@ -10,7 +9,8 @@ const emailService = {
     save,
     getDefaultFilter,
     setMailSort,
-    getEmptyMail
+    getEmptyMail,
+    createMails
   };
 
   function query(filterBy) {
@@ -83,79 +83,84 @@ function setMailSort(mails, sortBy = {}) {
   
     }
   }
-  const emails = [
-    {
-      id: 'e101',
-      subject: 'Miss you!',
-      body: 'Would love to catch up sometime',
-      isRead: false,
-      sentAt: 1551133930594,
-      removedAt: null,
-      from: 'momo@momo.com',
-      to: 'user@appsus.com'
-    },
 
-    {
-        id: 'e102',
-        subject: 'Miss xoxo!',
-        body: 'Would love to catch up sometime',
-        isRead: false,
-        sentAt: 1551154930594,
-        removedAt: null,
-        from: 'momo@momo.com',
-        to: 'user@appsus.com'
-      },
+  function createMails(){
+    const mails = [
       {
-        id: 'e103',
-        subject: 'You the best!',
+        id: 'e101',
+        subject: 'Miss you!',
         body: 'Would love to catch up sometime',
         isRead: false,
-        sentAt: 1551133930522,
+        sentAt: 1551133930594,
         removedAt: null,
         from: 'momo@momo.com',
         to: 'user@appsus.com'
       },
+  
       {
-        id: 'e104',
-        subject: 'No you!',
-        body: 'Would love to catch up sometime',
-        isRead: false,
-        sentAt: 1551133930114,
-        removedAt: null,
-        from: 'momo@momo.com',
-        to: 'user@appsus.com'
-      },
-      {
-        id: 'e105',
-        subject: 'Love you!',
-        body: 'Would love to catch up sometime',
-        isRead: false,
-        sentAt: 1551155660594,
-        removedAt: null,
-        from: 'momo@momo.com',
-        to: 'user@appsus.com'
-      },
-      {
-        id: 'e106',
-        subject: 'Miss your mom!',
-        body: 'Would love to catch up sometime',
-        isRead: false,
-        sentAt: 1551133970594,
-        removedAt: null,
-        from: 'momo@momo.com',
-        to: 'user@appsus.com'
-      },
-      {
-        id: 'e107',
-        subject: 'Miss your dad!',
-        body: 'Would love to catch up sometime',
-        isRead: false,
-        sentAt: 1551133934394,
-        removedAt: null,
-        from: 'momo@momo.com',
-        to: 'user@appsus.com'
-      },
-  ];
+          id: 'e102',
+          subject: 'Miss xoxo!',
+          body: 'Would love to catch up sometime',
+          isRead: false,
+          sentAt: 1551154930594,
+          removedAt: null,
+          from: 'momo@momo.com',
+          to: 'user@appsus.com'
+        },
+        {
+          id: 'e103',
+          subject: 'You the best!',
+          body: 'Would love to catch up sometime',
+          isRead: false,
+          sentAt: 1551133930522,
+          removedAt: null,
+          from: 'momo@momo.com',
+          to: 'user@appsus.com'
+        },
+        {
+          id: 'e104',
+          subject: 'No you!',
+          body: 'Would love to catch up sometime',
+          isRead: false,
+          sentAt: 1551133930114,
+          removedAt: null,
+          from: 'momo@momo.com',
+          to: 'user@appsus.com'
+        },
+        {
+          id: 'e105',
+          subject: 'Love you!',
+          body: 'Would love to catch up sometime',
+          isRead: false,
+          sentAt: 1551155660594,
+          removedAt: null,
+          from: 'momo@momo.com',
+          to: 'user@appsus.com'
+        },
+        {
+          id: 'e106',
+          subject: 'Miss your mom!',
+          body: 'Would love to catch up sometime',
+          isRead: false,
+          sentAt: 1551133970594,
+          removedAt: null,
+          from: 'momo@momo.com',
+          to: 'user@appsus.com'
+        },
+        {
+          id: 'e107',
+          subject: 'Miss your dad!',
+          body: 'Would love to catch up sometime',
+          isRead: false,
+          sentAt: 1551133934394,
+          removedAt: null,
+          from: 'momo@momo.com',
+          to: 'user@appsus.com'
+        },
+    ];
+  }
+
+  
   
   const gLoggedinUser = {
     email: 'user@appsus.com',
