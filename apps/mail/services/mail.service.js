@@ -1,6 +1,8 @@
 import { storageService } from "../../../services/async-storage.service.js";
-
+import { utilService } from "../../../services/util.service.js"
 const MAIL_KEY = 'emailDB';
+
+_createMails()
 
 export const emailService = {
     query,
@@ -10,7 +12,8 @@ export const emailService = {
     getDefaultFilter,
     setMailSort,
     getEmptyMail,
-    _createMails
+    _createMails,
+    getFilterFromSearchParams,
   };
 
   function query(filterBy) {
@@ -34,7 +37,19 @@ export const emailService = {
         }
         return mails
     })
+    .catch(err => {
+      console.error('Error querying mails:', err);
+      throw err; 
+  });
 }
+
+function getFilterFromSearchParams(searchParams) {
+  const filterBy = {};
+  if (searchParams.has('status')) filterBy.status = searchParams.get('status');
+  return filterBy;
+}
+
+
   function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
   }
@@ -85,96 +100,123 @@ function setMailSort(mails, sortBy = {}) {
     }
   }
 
-  function _createMails(){
-    const mails = [
-      {
-        id: 'e101',
-        subject: 'Miss you!',
-        body: 'Would love to catch up sometime',
-        isRead: false,
-        sentAt: 1551133930594,
-        removedAt: null,
-        from: 'momo@momo.com',
-        to: 'user@appsus.com'
-      },
-  
-      {
-          id: 'e102',
-          subject: 'Miss xoxo!',
-          body: 'Would love to catch up sometime',
-          isRead: false,
-          sentAt: 1551154930594,
-          removedAt: null,
-          from: 'momo@momo.com',
-          to: 'user@appsus.com'
-        },
-        {
-          id: 'e103',
-          subject: 'You the best!',
-          body: 'Would love to catch up sometime',
-          isRead: false,
-          sentAt: 1551133930522,
-          removedAt: null,
-          from: 'momo@momo.com',
-          to: 'user@appsus.com'
-        },
-        {
-          id: 'e104',
-          subject: 'No you!',
-          body: 'Would love to catch up sometime',
-          isRead: false,
-          sentAt: 1551133930114,
-          removedAt: null,
-          from: 'momo@momo.com',
-          to: 'user@appsus.com'
-        },
-        {
-          id: 'e105',
-          subject: 'Love you!',
-          body: 'Would love to catch up sometime',
-          isRead: false,
-          sentAt: 1551155660594,
-          removedAt: null,
-          from: 'momo@momo.com',
-          to: 'user@appsus.com'
-        },
-        {
-          id: 'e106',
-          subject: 'Miss your mom!',
-          body: 'Would love to catch up sometime',
-          isRead: false,
-          sentAt: 1551133970594,
-          removedAt: null,
-          from: 'momo@momo.com',
-          to: 'user@appsus.com'
-        },
-        {
-          id: 'e107',
-          subject: 'Miss your dad!',
-          body: 'Would love to catch up sometime',
-          isRead: false,
-          sentAt: 1551133934394,
-          removedAt: null,
-          from: 'momo@momo.com',
-          to: 'user@appsus.com'
-        },
-    ];
-    mails.forEach(mail => {
-      save(mail);
-    });
-  
+  function _createMails() {
+    let mails = utilService.loadFromStorage(MAIL_KEY);
+    if (!mails || !mails.length) {
+        mails = [];
+        for (let i = 0; i < 5; i++) {
+            const newMail = {
+                makeId: `e10${i + 1}`,
+                subject: 'Oh my god, MY MAILS CLONE IS WORKING!!!!!!',
+                body: 'Would love to continueeeee',
+                isRead: false,
+                sentAt: Date.now() - i * 1000000, 
+                removedAt: null,
+                from: 'Vicky@VickyPolatov.com',
+                to: 'user@appsus.com'
+            };
+            mails.push(newMail); 
+            save(newMail); 
+        }
+    }
     return mails;
   }
   
-  const gLoggedinUser = {
-    email: 'user@appsus.com',
-    fullname: 'Seniel Appsus'
-  };
+//   function _createMails(){
+//     let mails = utilService.loadFromStorage(MAIL_KEY)
+//     if (!mails || !mails.length) {
+//       mails = []
+//         for (let i = 0; i < 5; i++) {
+//         const mails = [
+//       {
+//         id: 'e101',
+//         subject: 'Miss you!',
+//         body: 'Would love to catch up sometime',
+//         isRead: false,
+//         sentAt: 1551133930594,
+//         removedAt: null,
+//         from: 'momo@momo.com',
+//         to: 'user@appsus.com'
+//       },
+  
+//       {
+//           id: 'e102',
+//           subject: 'Miss xoxo!',
+//           body: 'Would love to catch up sometime',
+//           isRead: false,
+//           sentAt: 1551154930594,
+//           removedAt: null,
+//           from: 'momo@momo.com',
+//           to: 'user@appsus.com'
+//         },
+//         {
+//           id: 'e103',
+//           subject: 'You the best!',
+//           body: 'Would love to catch up sometime',
+//           isRead: false,
+//           sentAt: 1551133930522,
+//           removedAt: null,
+//           from: 'momo@momo.com',
+//           to: 'user@appsus.com'
+//         },
+//         {
+//           id: 'e104',
+//           subject: 'No you!',
+//           body: 'Would love to catch up sometime',
+//           isRead: false,
+//           sentAt: 1551133930114,
+//           removedAt: null,
+//           from: 'momo@momo.com',
+//           to: 'user@appsus.com'
+//         },
+//         {
+//           id: 'e105',
+//           subject: 'Love you!',
+//           body: 'Would love to catch up sometime',
+//           isRead: false,
+//           sentAt: 1551155660594,
+//           removedAt: null,
+//           from: 'momo@momo.com',
+//           to: 'user@appsus.com'
+//         },
+//         {
+//           id: 'e106',
+//           subject: 'Miss your mom!',
+//           body: 'Would love to catch up sometime',
+//           isRead: false,
+//           sentAt: 1551133970594,
+//           removedAt: null,
+//           from: 'momo@momo.com',
+//           to: 'user@appsus.com'
+//         },
+//         {
+//           id: 'e107',
+//           subject: 'Miss your dad!',
+//           body: 'Would love to catch up sometime',
+//           isRead: false,
+//           sentAt: 1551133934394,
+//           removedAt: null,
+//           from: 'momo@momo.com',
+//           to: 'user@appsus.com'
+//         },
+//     ];
+//     mails.forEach(mail => {
+//       save(mail);
+//     });
+  
+//     return mails;
+//   }
+// }
+//   const gLoggedinUser = {
+//     email: 'user@appsus.com',
+//     fullname: 'Seniel Appsus'
+//   };
 
-  const criteria = {
-    status: 'inbox',
-    txt: 'Miss',
-    isRead: false,
-    isStared: true,
-    labels: ['important', 'romantic']
-  };
+//   const criteria = {
+//     status: 'inbox',
+//     txt: 'Miss',
+//     isRead: false,
+//     isStared: true,
+//     labels: ['important', 'romantic']
+//   };
+// }
