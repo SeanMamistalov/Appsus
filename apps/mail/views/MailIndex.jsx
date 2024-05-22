@@ -3,6 +3,7 @@ const { useSearchParams } = ReactRouterDOM
 import { emailService } from '../services/mail.service.js'
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 import { MailList } from '../cmps/MailList.jsx'
+import { MailSidebar } from './MailSidebar.jsx'
 
 function getFilterFromSearchParams(searchParams) {
     const filter = {};
@@ -40,6 +41,7 @@ export function MailIndex() {
 
     return (
         <section>
+            <MailSidebar/>
             <MailList mails={mails} onRemove={removeMail} />
         </section>
     )

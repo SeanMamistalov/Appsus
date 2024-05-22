@@ -1,7 +1,11 @@
 import { MailPreview } from '../cmps/MailPreview.jsx'
 
 export function MailList({ mails, onRemove }) {
-    if (!mails || mails.length === 0) {
+    if (!mails) {
+        return <div>Loading...</div>;
+    }
+
+    if (mails.length === 0) {
         return <div>No mails to display</div>;
     }
 
