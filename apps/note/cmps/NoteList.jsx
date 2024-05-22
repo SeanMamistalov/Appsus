@@ -1,4 +1,4 @@
-import { NotePreview } from './apps/note/NotePreview.jsx'
+import { NotePreview } from "./NotePreview.jsx"
 
 const { Link } = ReactRouterDOM
 

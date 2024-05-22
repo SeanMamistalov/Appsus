@@ -29,9 +29,9 @@
 const { useState, useEffect } = React
 // const { useSearchParams } = ReactRouterDOM
 
-import { noteService } from '../../note/services/note.service.js'
+import { noteService } from '../services/note.service.js'
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
-// import { NoteList } from '.../apps/note/cmps/NoteList.jsx'
+import { NoteList } from '../cmps/NoteList.jsx'
 // import { NoteFilter } from '../apps/note/cmps/NoteFilter.jsx'
 
 export function NoteIndex() {
@@ -64,7 +64,7 @@ export function NoteIndex() {
     return (
         <section>
             {/* <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} /> */}
-            {/* <NoteList notes={notes} onRemove={removeNote} /> */}
+            <NoteList notes={notes} onRemove={removeNote} />
         </section>
     )
 }

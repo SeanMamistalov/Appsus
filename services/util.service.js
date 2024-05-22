@@ -7,7 +7,8 @@ export const utilService = {
     getDayName,
     getMonthName,
     loadFromStorage,
-    saveToStorage
+    saveToStorage,
+    randomPastTime
 }
 
 function makeId(length = 6) {
@@ -70,4 +71,10 @@ function saveToStorage(key, val) {
 function loadFromStorage(key) {
     var val = localStorage.getItem(key)
     return JSON.parse(val)
+}
+
+function randomPastTime() {
+    const now = Date.now()
+    const past = now - getRandomIntInclusive(0, 1000000000)
+    return new Date(past)
 }
