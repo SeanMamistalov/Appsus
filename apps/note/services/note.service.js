@@ -69,7 +69,7 @@ function _createNotes() {
             const note = {
                 id: utilService.makeId(5),
                 createdAt: utilService.randomPastTime().toLocaleString(),
-                type: 'NoteTxt',
+                type: 'txt',
                 isPinned: true,
                 style: {
                     backgroundColor: colors[utilService.getRandomIntInclusive(0, colors.length - 1)]
