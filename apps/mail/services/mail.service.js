@@ -1,8 +1,8 @@
-import { storageService } from "../../../services/async-storage.service";
+import { storageService } from "../../../services/async-storage.service.js";
 
 const MAIL_KEY = 'emailDB';
 
-const emailService = {
+export const emailService = {
     query,
     get,
     remove,
@@ -10,7 +10,7 @@ const emailService = {
     getDefaultFilter,
     setMailSort,
     getEmptyMail,
-    createMails
+    _createMails
   };
 
   function query(filterBy) {
@@ -32,6 +32,7 @@ const emailService = {
               break;
           }
         }
+        return mails
     })
 }
   function get(mailId) {
@@ -84,7 +85,7 @@ function setMailSort(mails, sortBy = {}) {
     }
   }
 
-  function createMails(){
+  function _createMails(){
     const mails = [
       {
         id: 'e101',
@@ -158,9 +159,12 @@ function setMailSort(mails, sortBy = {}) {
           to: 'user@appsus.com'
         },
     ];
-  }
-
+    mails.forEach(mail => {
+      save(mail);
+    });
   
+    return mails;
+  }
   
   const gLoggedinUser = {
     email: 'user@appsus.com',
