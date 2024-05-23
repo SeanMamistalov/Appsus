@@ -1,3 +1,16 @@
 :root {
-    --main-bg-color: lightblue;
+    --background-color: #ffffff;
+    --sidebar-bg-color: #f1f3f4;
+    --mail-item-bg-color: #ffffff;
+    --mail-item-hover-bg-color: #f0f0f0;
+    --border-color: #ddd;
+    --text-color: #202124;
+    --secondary-text-color: #5f6368;
+    --primary-color: #1a73e8;
+    --main-bg-color: #ffffff;
+    --mail-item-hover-bg-color: #f0f0f0;
+    --text-color: #202124;
+    --secondary-text-color: #5f6368;
+    --border-color: #ddd;
+    --danger-color: #d93025; */
 }

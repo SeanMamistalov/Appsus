@@ -1,9 +1,9 @@
 export function MailPreview({ mail }) {
     return (
-        <article className="email-preview">
-            <p>From: {mail.from}</p>
-            <p>Subject: {mail.subject}</p>
-            <p>Body: {mail.body}</p>
-        </article>
+        <div className="email-item">
+            <span className="email-sender">{mail.from}</span>
+            <span className="email-subject">{mail.subject}</span>
+            <span className="email-time">{new Date(mail.sentAt).toLocaleTimeString()}</span>
+        </div>
     );
 }

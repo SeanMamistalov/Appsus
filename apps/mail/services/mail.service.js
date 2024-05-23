@@ -106,22 +106,22 @@ function setMailSort(mails, sortBy = {}) {
         mails = [];
         for (let i = 0; i < 5; i++) {
             const newMail = {
-                makeId: `e10${i + 1}`,
-                subject: 'Oh my god, MY MAILS CLONE IS WORKING!!!!!!',
-                body: 'Would love to continueeeee',
+                id: utilService.makeId(6),
+                subject: utilService.makeLorem(2),
+                body: utilService.makeLorem(50),
                 isRead: false,
-                sentAt: Date.now() - i * 1000000, 
+                sentAt: utilService.randomPastTime(),
                 removedAt: null,
-                from: 'Vicky@VickyPolatov.com',
-                to: 'user@appsus.com'
+                from: `Daniel&Sean${i}@CodingAcademy.com`,
+                to: 'Sean&Daniel@Appsus.com'
             };
-            mails.push(newMail); 
-            save(newMail); 
+            mails.push(newMail);
         }
+        utilService.saveToStorage(MAIL_KEY, mails); // Save all mails at once
     }
     return mails;
-  }
-  
+}
+
 //   function _createMails(){
 //     let mails = utilService.loadFromStorage(MAIL_KEY)
 //     if (!mails || !mails.length) {
