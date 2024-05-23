@@ -1,19 +1,49 @@
-.sidebar-keep {
+.note-index-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar-note {
     width: 240px;
-    background-color: #fff;
-    border-right: 3px solid #ddd;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dadce0;
+    overflow-y: auto;
+}
+
+.note-list {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
     padding: 16px;
+    overflow-y: auto;
 }
 
-.sidebar-keep:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
+.note-list::-webkit-scrollbar {
+    width: 8px;
 }
 
-.sidebar-keep:hover .material-icons {
-    color: #FFEB3B;
+.note-list::-webkit-scrollbar-track {
+    background: #f8f9fa;
 }
 
-.keep-logo {
-    width: 50px;
+.note-list::-webkit-scrollbar-thumb {
+    background: #ced4da;
+    border-radius: 4px;
+}
+
+.note-list li {
+    list-style: none;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.note-list li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.note-list li:last-child {
+    margin-bottom: 0;
 }
