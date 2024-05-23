@@ -1,0 +1,20 @@
+.note-filter {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dadce0;
+}
+
+.filter-input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.filter-input:last-child {
+    margin-right: 0;
+}

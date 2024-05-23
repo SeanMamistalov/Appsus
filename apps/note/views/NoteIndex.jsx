@@ -5,6 +5,7 @@ import { noteService } from '../services/note.service.js'
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { SidebarNote } from './SidebarNote.jsx'
+import { SearchNote } from '../cmps/SearchNote.jsx'
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
@@ -35,10 +36,16 @@ export function NoteIndex() {
 
     return (
         <section className="note-index-container">
-            {/* <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} /> */}
-            <SidebarNote onFilter={onSetFilterBy} />
-            <div className="note-list-container">
-                <NoteList notes={notes} onRemove={removeNote} />
+            <div className="search-note-container">
+                <SearchNote search={filterBy} onSearch={onSetFilterBy} />
+            </div>
+            <div className="content-container">
+                <div className="sidebar-note">
+                    <SidebarNote onFilter={onSetFilterBy} />
+                </div>
+                <div className="note-list">
+                    <NoteList notes={notes} onRemove={removeNote} />
+                </div>
             </div>
         </section>
     )

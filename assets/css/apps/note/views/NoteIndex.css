@@ -1,23 +1,33 @@
 .note-index-container {
     display: flex;
+    flex-direction: column;
     height: 100vh;
 }
 
-.sidebar-note {
-    width: 240px;
-    background-color: #f8f9fa;
-    border-right: 1px solid #dadce0;
-    overflow-y: auto;
+.content-container {
+    display: flex;
+    flex: 1;
 }
 
 .note-list {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
     padding: 16px;
     overflow-y: auto;
 }
+
+.note-list li {
+    list-style: none;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 
 .note-list::-webkit-scrollbar {
     width: 8px;

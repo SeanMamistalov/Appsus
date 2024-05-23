@@ -1,7 +1,6 @@
 .sidebar-keep {
     width: 240px;
     background-color: #fff;
-    border-right: 1px solid #dadce0;
     padding: 16px;
     transition: background-color 0.3s ease;
     overflow-y: auto;
@@ -32,22 +31,6 @@
     padding: 8px 0;
     cursor: pointer;
     color: #5f6368;
-}
-
-.sidebar-keep {
-    background-color: #f1f3f4;
-}
-
-.note-index-container {
-    display: flex;
-}
-
-.sidebar-keep::-webkit-scrollbar {
-    display: none;
-}
-
-.sidebar-keep {
-    scrollbar-width: none;
 }
 
 .sidebar-keep-item:hover .material-icons {
