@@ -11,42 +11,35 @@ body {
   padding: 16px;
 }
 
+
 .sidebar-item:hover {
-  background-color: #f0f0f0;
+  background-color: #ddd;
   cursor: pointer;
 }
 
-.sidebar-item:hover .material-icons {
-  color: #1a73e8;
+.mail-index {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100vh;
 }
 
-.email-item {
-  border-bottom: 1px solid #ddd;
-  padding: 12px 0;
-}
-.email-item:hover {
-  background-color: #f0f0f0;
+.mail-index .sidebar {
+    background-color: var(--sidebar-bg-color);
+    border-right: 1px solid var(--border-color);
+    padding: 16px;
 }
 
-.email-item:last-child {
-  border-bottom: none;
+.mail-index .content {
+    padding: 16px;
 }
 
-.email-sender {
-  font-weight: bold;
-  color: #202124;
+.mail-index .menu-bar {
+    display: flex;
+    align-items: center;
+    height: auto;
 }
 
-.email-subject {
-  margin-left: 8px;
-  color: #5f6368;
-}
-
-.email-time {
-  margin-left: auto;
-  color: #5f6368;
-}
-
-header .gmail-logo{
-  width: 100px;
+.mail-index .menu-bar img {
+    max-width: 100px;
+    height: auto;
 }
