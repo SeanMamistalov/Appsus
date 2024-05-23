@@ -34,10 +34,12 @@ export function NoteIndex() {
     }
 
     return (
-        <section>
+        <section className="note-index-container">
             {/* <NoteFilter filterBy={filterBy} onFilter={onSetFilterBy} /> */}
-            <SidebarNote onFilter={onSetFilterBy}/>
-            <NoteList notes={notes} onRemove={removeNote} />
+            <SidebarNote onFilter={onSetFilterBy} />
+            <div className="note-list-container">
+                <NoteList notes={notes} onRemove={removeNote} />
+            </div>
         </section>
     )
 }

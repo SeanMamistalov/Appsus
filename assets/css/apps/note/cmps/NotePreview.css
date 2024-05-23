@@ -1,0 +1,33 @@
+.note-preview {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.note-preview h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.note-preview p {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+.note-preview .note-info {
+    margin-bottom: 8px;
+}
+
+.note-preview .note-content {
+    margin-top: 8px;
+}
+
+.note-preview .note-content img {
+    max-width: 100%;
+    border-radius: 4px;
+}
