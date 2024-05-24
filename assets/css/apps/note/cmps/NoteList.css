@@ -1,29 +1,50 @@
-.note-list {
-    flex-grow: 1;
-    padding: 16px;
+.note-index-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-.note-list ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+.content-container {
+    display: flex;
+    flex: 1;
+}
+
+.note-list {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .note-list li {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
     padding: 16px;
-    background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 300px;
+    flex-shrink: 0;
 }
 
 .note-list li:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
+.note-list::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+/* .note-list::-webkit-scrollbar-thumb {
+    background: #ced4da;
+    border-radius: 4px;
+} */
 
 .buttons-container {
     display: none;

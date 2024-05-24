@@ -18,14 +18,7 @@
 @import './apps/note/views/SidebarNote.css';
 @import './apps/note/cmps/NoteList.css';
 @import './apps/note/cmps/NotePreview.css';
-<<<<<<< HEAD
 @import './apps/note/cmps/SearchNote.css';
-
-@import './apps/mail/views/MailIndex.css';
-/* Cmps */
-
-=======
->>>>>>> 92e069119b23d4345ce99f50aa82cc43992c11d8
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
 @import './apps/mail/cmps/MailList.css';

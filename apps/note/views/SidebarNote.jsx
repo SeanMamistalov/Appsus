@@ -10,10 +10,6 @@ export function SidebarNote({ onFilter }) {
 
     return (
         <div className="sidebar-keep">
-            <header>
-                <span className="material-icons">menu</span>
-                <img className="keep-logo" src="assets/img/keep_google_logo.png" alt="keep-logo" /> Keep
-            </header>
             <div
                 className={`sidebar-keep-item ${activeFilter === 'notes' ? 'active' : ''}`}
                 onClick={() => handleFilterClick('notes')}

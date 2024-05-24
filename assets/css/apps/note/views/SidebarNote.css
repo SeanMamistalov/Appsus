@@ -6,18 +6,6 @@
     overflow-y: auto;
 }
 
-.sidebar-keep header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.sidebar-keep header img {
-    width: 32px;
-    height: 32px;
-    margin-right: 12px;
-}
-
 .sidebar-keep .material-icons {
     font-size: 24px;
     margin-right: 12px;
@@ -48,9 +36,4 @@
 .sidebar-keep-item.active {
     background-color: #feefc3;
     color: #000;
-}
-
-.material-icons {
-    font-size: 24px;
-    margin-right: 8px;
 }
