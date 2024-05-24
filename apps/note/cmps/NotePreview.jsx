@@ -15,10 +15,8 @@ export function NotePreview({ note }) {
                 Created At: {note.createdAt}<br />
                 Type: {note.type}<br />
                 Pinned: {note.isPinned ? 'Yes' : 'No'}<br />
-                Background Color: {note.style.backgroundColor}
             </p>
-            {NoteComponent ? <NoteComponent info={note.info} /> : <p>Unsupported note type</p>}
-            <p>{note.info.txt}</p>
+            {/* {NoteComponent ? <NoteComponent info={note.info} /> : <p>Unsupported note type</p>} */}
         </article>
     )
 }

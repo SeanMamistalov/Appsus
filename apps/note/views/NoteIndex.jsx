@@ -19,10 +19,6 @@ export function NoteIndex() {
             .catch(err => showErrorMsg('Failed to fetch notes'))
     }, [filterBy, setSearchParams])
 
-    function onSetFilterBy(newFilter) {
-        setFilterBy(newFilter)
-    }
-
     function removeNote(noteId) {
         noteService.remove(noteId)
             .then(() => {
@@ -33,17 +29,15 @@ export function NoteIndex() {
                 showErrorMsg('Failed to remove note')
             })
     }
-
+    
     return (
         <section className="note-index-container">
             <div className="search-note-container">
-                <SearchNote search={filterBy} onSearch={onSetFilterBy} />
+                <SearchNote search={filterBy} onSearch={setFilterBy} />
             </div>
             <div className="content-container">
-                <div className="sidebar-note">
-                    <SidebarNote onFilter={onSetFilterBy} />
-                </div>
-                <div className="note-list">
+                <SidebarNote onFilter={setFilterBy} />
+                <div className="note-list-container">
                     <NoteList notes={notes} onRemove={removeNote} />
                 </div>
             </div>

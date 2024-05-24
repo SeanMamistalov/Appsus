@@ -1,18 +1,15 @@
 const { useState, useEffect } = React
 
-
 export function SearchNote({ search, onSearch }) {
-    const [searchNote, setSearchNote] = useState(search)
+    const [filterByToEdit, setFilterByToEdit] = useState(search)
 
     useEffect(() => {
-        onSearch(searchNote)
-    }, [searchNote, onSearch])
+        onSearch(filterByToEdit)
+    }, [filterByToEdit, onSearch])
 
-    function handleChange({ target }) {
-        const { name, value, type } = target
-        const newValue = type === 'number' ? +value : value
-
-        setSearchNote((prevFilterBy) => ({ ...prevFilterBy, [name]: newValue }))
+    function handleChangeNote({ target }) {
+        const { name, value } = target
+        setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, [name]: value }))
     }
 
     return (
@@ -25,8 +22,8 @@ export function SearchNote({ search, onSearch }) {
                 </div>
                 <div className="search-input-container">
                     <input
-                        onChange={handleChange}
-                        value={searchNote.title}
+                        onChange={handleChangeNote}
+                        value={filterByToEdit.title || ''}
                         name="title"
                         type="text"
                         placeholder="Search..."
@@ -37,5 +34,3 @@ export function SearchNote({ search, onSearch }) {
         </section>
     )
 }
-
-
