@@ -16,6 +16,14 @@
     padding: 16px;
     overflow-x: auto;
     overflow-y: hidden;
+    margin-right: 10px;
+}
+
+.note-list .note-item {
+    flex: 1 0 calc(20% - 16px);
+    min-width: 200px;
+    max-width: 300px;
+    margin-bottom: 16px;
 }
 
 .note-list li {
@@ -40,11 +48,6 @@
 .note-list::-webkit-scrollbar-track {
     background: #f8f9fa;
 }
-
-/* .note-list::-webkit-scrollbar-thumb {
-    background: #ced4da;
-    border-radius: 4px;
-} */
 
 .buttons-container {
     display: none;
