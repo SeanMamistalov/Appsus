@@ -1,8 +1,9 @@
-import { NotePreview } from "./NotePreview.jsx";
+import { NotePreview } from "../cmps/NotePreview.jsx"
+const { useOutletContext } = ReactRouterDOM
 
-const { Link } = ReactRouterDOM
+export function NoteList() {
+    const { notes, onRemove, onTogglePin } = useOutletContext()
 
-export function NoteList({ notes, onRemove, onTogglePin }) {
     return (
         <section className="note-list">
             <ul className="note-items">
@@ -39,5 +40,5 @@ export function NoteList({ notes, onRemove, onTogglePin }) {
                 ))}
             </ul>
         </section>
-    );
+    )
 }

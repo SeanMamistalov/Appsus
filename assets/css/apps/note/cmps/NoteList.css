@@ -1,22 +1,27 @@
 .note-index-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100vh;
 }
 
 .content-container {
-    display: flex;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.note-list-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
 .note-list {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 16px;
     padding: 16px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    margin-right: 10px;
 }
 
 .note-list .note-item {

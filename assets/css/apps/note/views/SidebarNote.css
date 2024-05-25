@@ -4,6 +4,7 @@
     padding: 16px;
     transition: background-color 0.3s ease;
     overflow-y: auto;
+    margin-top: 50px;
 }
 
 .sidebar-keep .material-icons {
@@ -19,6 +20,7 @@
     padding: 8px 0;
     cursor: pointer;
     color: #5f6368;
+    text-decoration: none;
 }
 
 .sidebar-keep-item.active .material-icons {

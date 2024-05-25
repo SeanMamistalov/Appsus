@@ -5,7 +5,6 @@
     align-items: center;
     padding: 8px 16px;
     background-color: #f8f9fa;
-    border-bottom: 1px solid #dadce0;
 }
 
 .keep-header {
@@ -55,4 +54,11 @@
     font-size: 20px;
     color: #80868b;
     cursor: pointer;
+}
+
+.search-note-container {
+    width: 100%;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dadce0;
 }
