@@ -1,9 +1,27 @@
-export function MailPreview({ mail }) {
-    return (
-        <div className="email-item">
-            <span className="email-sender">{mail.from}</span>
-            <span className="email-subject">{mail.subject}</span>
-            <span className="email-time">{new Date(mail.sentAt).toLocaleTimeString()}</span>
-        </div>
-    );
+const { Link } = ReactRouterDOM;
+
+export function MailPreview({ mail, onMarkAsRead }) {
+  const handleClick = () => {
+    if (!mail.isRead) {
+      onMarkAsRead(mail.id);
+    }
+  };
+
+  return (
+    <Link
+      to={`/mail/${mail.id}`}
+      className={`email-item ${mail.isRead ? "read" : "unread"}`}
+      onClick={handleClick}
+    >
+      <span className="email-sender">{mail.from}</span>
+      <span className="email-subject">
+        {mail.subject.length > 50
+          ? mail.subject.substring(0, 47) + "..."
+          : mail.subject}
+      </span>
+      <span className="email-time">
+        {new Date(mail.sentAt).toLocaleTimeString()}
+      </span>
+    </Link>
+  );
 }
