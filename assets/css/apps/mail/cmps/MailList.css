@@ -28,7 +28,7 @@
 }
 
 .mail-list .mail-item.read {
-    background-color: #f0f0f0; 
+    background-color: rgb(42, 42, 65); 
 }
 
 .mail-list .mail-item:hover {
@@ -45,8 +45,4 @@
     font-size: 1.2em;
     transition: color 0.2s ease;
     outline: none;  
-}
-
-.mail-list .remove-btn:hover {
-    color: var(--danger-color);
 }

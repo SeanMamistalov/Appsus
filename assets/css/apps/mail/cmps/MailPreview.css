@@ -4,12 +4,12 @@
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid var(--border-color);
-    background-color: var(--mail-item-bg-color);
+    background-color: var( --background-color);
     transition: background-color 0.2s ease;
 }
 
 .email-item:hover {
-    background-color: var(--mail-item-hover-bg-color);
+    background-color: white;
 }
 
 .email-sender {
@@ -27,3 +27,23 @@
     color: var(--secondary-text-color);
     white-space: nowrap;
 } 
+
+.email-item {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .email-item.unread {
+    background-color: #fff;
+  }
+  
+  .email-item.read {
+    background-color: #cdecff; 
+  }
+  
+  .email-item:hover {
+    background-color: #f3f3f3;
+  }
+  
+  
