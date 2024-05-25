@@ -18,6 +18,11 @@ export const noteService = {
 function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
+            if (filterBy.isTrashed !== undefined) {
+                notes = notes.filter(note => note.isTrashed === filterBy.isTrashed)
+            } else {
+                notes = notes.filter(note => !note.isTrashed)
+            }
             if (filterBy.title) {
                 const regExp = new RegExp(filterBy.title, 'i')
                 notes = notes.filter(note => regExp.test(note.info.title))
@@ -36,7 +41,11 @@ function get(noteId) {
 }
 
 function remove(noteId) {
-    return storageService.remove(NOTE_KEY, noteId)
+    return get(noteId)
+        .then(note => {
+            note.isTrashed = true
+            return save(note)
+        })
 }
 
 function save(note) {
@@ -71,12 +80,12 @@ function _createNotes() {
     if (!notes || !notes.length) {
         notes = []
         for (let i = 0; i < 5; i++) {
-
             const note = {
                 id: utilService.makeId(5),
                 createdAt: utilService.randomPastTime().toLocaleString(),
                 type: 'txt',
                 isPinned: true,
+                isTrashed: false,
                 info: {
                     title: utilService.makeLorem(2),
                     txt: utilService.makeLorem(utilService.getRandomIntInclusive(2, 10))
@@ -87,4 +96,3 @@ function _createNotes() {
         utilService.saveToStorage(NOTE_KEY, notes)
     }
 }
-

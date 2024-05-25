@@ -20,11 +20,11 @@ export function NoteIndex() {
         noteService.remove(noteId)
             .then(() => {
                 setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
-                showSuccessMsg(`Note ${noteId} removed successfully!`)
+                showSuccessMsg(`Note ${noteId} moved to trash successfully!`)
             })
-            .catch(err => showErrorMsg('Failed to remove note'))
+            .catch(err => showErrorMsg('Failed to move note to trash'))
     }
-
+    
     function togglePinNote(noteId) {
         noteService.togglePin(noteId)
             .then(() => {
@@ -33,7 +33,7 @@ export function NoteIndex() {
                         if (note.id === noteId) note.isPinned = !note.isPinned
                         return note
                     })
-                    updatedNotes.sort((a, b) => b.isPinned - a.isPinned)
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
                     return updatedNotes
                 })
                 showSuccessMsg(`Note ${noteId} pin status updated successfully!`)
@@ -61,13 +61,13 @@ export function NoteIndex() {
                 </NavLink>
                 <NavLink 
                     className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
-                    to="/note/trash">
-                    <span className="material-icons">delete</span> Trash
+                    to="/note/archives">
+                    <span className="material-icons">archive</span> Archives
                 </NavLink>
                 <NavLink 
                     className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
-                    to="/note/archives">
-                    <span className="material-icons">archive</span> Archives
+                    to="/note/trash">
+                    <span className="material-icons">delete</span> Trash
                 </NavLink>
             </nav>
             <div className="content-container">
@@ -81,3 +81,4 @@ export function NoteIndex() {
         </section>
     )
 }
+
