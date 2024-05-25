@@ -29,6 +29,24 @@ export function NoteIndex() {
                 showErrorMsg('Failed to remove note')
             })
     }
+
+    function togglePinNote(noteId) {
+        noteService.togglePin(noteId)
+            .then(() => {
+                setNotes(prevNotes => {
+                    const updatedNotes = prevNotes.map(note => {
+                        if (note.id === noteId) note.isPinned = !note.isPinned
+                        return note
+                    })
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
+                    return updatedNotes
+                })
+                showSuccessMsg(`Note ${noteId} pin status updated successfully!`)
+            })
+            .catch(err => {
+                showErrorMsg('Failed to update pin status')
+            })
+    }
     
     return (
         <section className="note-index-container">
@@ -38,7 +56,7 @@ export function NoteIndex() {
             <div className="content-container">
                 <SidebarNote onFilter={setFilterBy} />
                 <div className="note-list-container">
-                    <NoteList notes={notes} onRemove={removeNote} />
+                    <NoteList notes={notes} onRemove={removeNote} onTogglePin={togglePinNote} />
                 </div>
             </div>
         </section>

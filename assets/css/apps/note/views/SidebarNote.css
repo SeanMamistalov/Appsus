@@ -21,8 +21,12 @@
     color: #5f6368;
 }
 
-.sidebar-keep-item:hover .material-icons {
+.sidebar-keep-item.active .material-icons {
     color: #202124;
+}
+
+.sidebar-keep-item:hover {
+    background-color: #f1f3f4;
 }
 
 .sidebar-keep-item {

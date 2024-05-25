@@ -1,13 +1,16 @@
 import { NotePreview } from "./NotePreview.jsx";
 
-const { Link } = ReactRouterDOM;
+const { Link } = ReactRouterDOM
 
-export function NoteList({ notes, onRemove }) {
+export function NoteList({ notes, onRemove, onTogglePin }) {
     return (
         <section className="note-list">
             <ul className="note-items">
                 {notes.map(note => (
                     <li key={note.id} className="note-item">
+                        <button onClick={() => onTogglePin(note.id)} className="icon-button">
+                            <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
+                        </button>
                         <NotePreview note={note} />
                         <div className="buttons-container">
                             <button onClick={() => onRemove(note.id)} className="icon-button">
@@ -36,5 +39,5 @@ export function NoteList({ notes, onRemove }) {
                 ))}
             </ul>
         </section>
-    )
+    );
 }

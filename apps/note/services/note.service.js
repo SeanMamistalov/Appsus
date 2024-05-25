@@ -12,18 +12,20 @@ export const noteService = {
     save,
     getEmptyNote,
     getFilterFromSearchParams,
+    togglePin
 }
 
 function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
             if (filterBy.title) {
-                const regExp = new RegExp(filterBy.title, 'i');
+                const regExp = new RegExp(filterBy.title, 'i')
                 notes = notes.filter(note => regExp.test(note.info.title))
             }
             if (filterBy.type) {
                 notes = notes.filter(note => note.type === filterBy.type)
             }
+            notes.sort((a, b) => a.isPinned - b.isPinned)
             return notes
         })
 }
@@ -54,6 +56,14 @@ function getFilterFromSearchParams(searchParams) {
         type: searchParams.get('type') || '',
         title: searchParams.get('title') || '',
     }
+}
+
+function togglePin(noteId) {
+    return get(noteId)
+        .then(note => {
+            note.isPinned = !note.isPinned
+            return save(note)
+        })
 }
 
 function _createNotes() {
