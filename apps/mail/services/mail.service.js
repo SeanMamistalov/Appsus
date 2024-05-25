@@ -155,8 +155,8 @@ function _createMails() {
         isRead: false,
         sentAt: utilService.randomPastTime(),
         removedAt: null,
-        from: `Daniel&Sean${i}@CodingAcademy.com`,
-        to: "Sean&Daniel@Appsus.com",
+        from: `AppsusUser${i}@gmail.com`,
+        to: "AppsusReceive@Appsus.com",
       };
       mails.push(newMail);
     }

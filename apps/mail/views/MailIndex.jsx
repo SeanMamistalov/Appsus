@@ -1,12 +1,12 @@
 const { useState, useEffect } = React;
 const { useSearchParams } = ReactRouterDOM;
+const { NavLink } = ReactRouterDOM
 import { emailService } from "../services/mail.service.js";
 import {
   showSuccessMsg,
   showErrorMsg,
 } from "../../../services/event-bus.service.js";
 import { MailList } from "../cmps/MailList.jsx";
-import { MailSidebar } from "./MailSidebar.jsx";
 
 function getFilterFromSearchParams(searchParams) {
   const filter = {};
@@ -63,10 +63,48 @@ export function MailIndex() {
       .catch((err) => showErrorMsg("Failed to mark mail as read"));
   }
 
-  return (
-    <section className="mail-index">
-      <MailSidebar />
+//   return (
+//     <section className="mail-index">
+//       <MailSidebar />
+//       <MailList mails={mails} onRemove={removeMail} onMarkAsRead={markAsRead} />
+//     </section>
+    
+//   );
+// }
+
+return (
+  <section className="mail-index">
+      <nav className="sidebar-gmail">
+      <span className="material-icons">menu</span>
+      <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
+          <NavLink 
+              className={({ isActive }) => "sidebar-item inbox" + (isActive ? " active" : "")} 
+              to="/mail/inbox">
+              <span className="material-icons">inbox</span> Inbox
+          </NavLink>
+          <NavLink 
+              className={({ isActive }) => "sidebar-item starred" + (isActive ? " active" : "")} 
+              to="/mail/starred">
+              <span className="material-icons">star</span> Starred
+          </NavLink>
+          <NavLink 
+              className={({ isActive }) => "sidebar-item sent" + (isActive ? " active" : "")} 
+              to="/mail/sentEmails">
+              <span className="material-icons">send</span> Sent
+          </NavLink>
+          <NavLink 
+              className={({ isActive }) => "sidebar-item trash" + (isActive ? " active" : "")} 
+              to="/mail/trash">
+              <span className="material-icons">delete</span> Trash
+          </NavLink>
+          <NavLink 
+              className={({ isActive }) => "sidebar-item drafts" + (isActive ? " active" : "")} 
+              to="/mail/drafts">
+              <span className="material-icons">drafts</span> Drafts
+          </NavLink>
+      </nav>
       <MailList mails={mails} onRemove={removeMail} onMarkAsRead={markAsRead} />
-    </section>
-  );
+  </section>
+)
 }
+

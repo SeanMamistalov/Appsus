@@ -3,43 +3,43 @@ body {
   margin: 0;
   background-color: #fff;
 }
+.mail-index {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+}
 
 .sidebar-gmail {
-  width: 240px;
-  background-color: #fff;
-  border-right: 3px solid #ddd;
+  background-color: #f2f2f2;
+  border-right: 1px solid #ddd;
   padding: 16px;
 }
 
+.sidebar-gmail span.material-icons {
+  font-size: 24px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  color: #666;
+  text-decoration: none;
+}
 
 .sidebar-item:hover {
   background-color: #ddd;
   cursor: pointer;
+  color: #000;
 }
 
-.mail-index {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    height: 100vh;
+.sidebar-item.active {
+  background-color: #ddd;
+  color: #000;
 }
 
-.mail-index .sidebar {
-    background-color: var(--sidebar-bg-color);
-    border-right: 1px solid var(--border-color);
-    padding: 16px;
-}
-
-.mail-index .content {
-    padding: 16px;
-}
-
-.mail-index .menu-bar {
-    display: flex;
-    align-items: center;
-    height: auto;
-}
-
-.mail-index .menu-bar img {
-    max-width: 100px;
-    height: auto;
+.mail-index .sidebar-gmail .gmail-logo {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 16px;
 }
