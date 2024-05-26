@@ -1,5 +1,5 @@
 export function BookPreview({ book }) {
-    const defaultImageSrc = 'BooksImages/default-image.jpg'
+    const defaultImageSrc = './assets/img/BooksImages/default-image.jpg'
     return <article className="book-preview">
         <h3>Title: {book.title}</h3>
         <p>
