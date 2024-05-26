@@ -43,3 +43,24 @@ body {
   height: auto;
   margin-bottom: 16px;
 }
+
+.mail-index {
+  display: flex;
+  height: 100%;
+}
+.sidebar-gmail {
+  transform: translateX(-210px); 
+  transition: transform 0.3s ease;
+}
+
+.sidebar-open .sidebar-gmail {
+  transform: translateX(0);
+}
+
+.menu-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 999; 
+}
+
