@@ -4,6 +4,7 @@ export function Home() {
   return (
     <section className="home-view">
       <div className="hero">
+      <img src="assets/img/horse-logo.jpg" alt="Horse Logo" className="logo" /> 
         <h1>Welcome to Appsus!</h1>
         <p>We are here to provide you with top-notch development services.</p>
         <Link to="/mail"><button className="btn">Mail</button></Link>

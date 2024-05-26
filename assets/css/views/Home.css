@@ -39,3 +39,9 @@
 .home-view .hero .btn:hover {
   background-color: #0056b3;
 }
+
+.logo {
+  width: 50%;
+  height: auto; 
+  margin-bottom: 20px; 
+}
