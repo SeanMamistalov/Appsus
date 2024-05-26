@@ -14,9 +14,9 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   };
 
   const handleToggleStarred = (e) => {
-    e.stopPropagation(); // Stop event propagation to prevent multiple click events
+    e.stopPropagation(); 
     setIsStarred(!isStarred);
-    onToggleStarred(mail.id);
+    // onToggleStarred(mail.id);
   };
 
   return (
