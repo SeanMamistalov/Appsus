@@ -1,0 +1,50 @@
+.about-view {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .about-view h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+  }
+  
+  .about-view .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .about-view .content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .about-view .content .teammate-sean,
+  .about-view .content .teammate-daniel {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .about-view .content .teammate-sean h4,
+  .about-view .content .teammate-daniel h4 {
+    margin-bottom: 10px;
+  }
+  
+  .about-view .content .teammate-sean p,
+  .about-view .content .teammate-daniel p {
+    margin-bottom: 5px;
+  }
+  
+  .about-view .content .teammate-sean a,
+  .about-view .content .teammate-daniel a {
+    color: #007bff;
+  }
+  
+  .about-view .content .teammate-sean a:hover,
+  .about-view .content .teammate-daniel a:hover {
+    text-decoration: underline;
+  }
+  
