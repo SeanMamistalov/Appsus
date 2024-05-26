@@ -29,15 +29,19 @@ nav a:active {
   }
   
   nav a:hover {
-    color: #007bff;
-  }
+    background: linear-gradient(45deg, #b14e9d, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;  }
   
   .nav-link-active {
-    color: #007bff;
-    font-weight: bold;
+    background: linear-gradient(45deg, #b14e9d, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
   }
   
-  h3 {
+  .app-header h3 {
     background: linear-gradient(45deg, #ff00cc, #3333ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
