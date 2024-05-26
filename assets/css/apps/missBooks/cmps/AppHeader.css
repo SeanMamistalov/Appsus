@@ -1,0 +1,25 @@
+.app-header {
+    background-color: #ffffff;
+    /* color: #000000; */
+    padding: 1rem;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.app-header nav {
+    margin-top: 1rem;
+}
+
+.app-header nav a {
+    color: #000000;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+.app-header nav a:hover,
+.app-header nav a.active {
+    color: #28a7fb;
+}

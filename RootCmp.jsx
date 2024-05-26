@@ -12,6 +12,7 @@ import { Archives } from "./apps/note/views/Archives.jsx"
 import { NoteList } from "./apps/note/views/NoteList.jsx"
 import { Reminders } from "./apps/note/views/Reminders.jsx"
 import { EditLabels } from "./apps/note/views/Editlabels.jsx"
+import { BookIndex } from "./apps/missBooks/views/BookIndex.jsx"
 
 export function App() {
     return <Router>
@@ -30,6 +31,7 @@ export function App() {
                     <Route path="/note/archives" element={<Archives />}/>
                     <Route path="/note/trash" element={<Trash />}/>
                 </Route>
+                <Route path="/book" element={<BookIndex />} />
             </Routes>
         </section>
     </Router>

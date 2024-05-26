@@ -1,0 +1,35 @@
+.accordion {
+    padding: 0.3em;
+    border-bottom: 1.5px solid hsla(340 10% 52%/.5);
+    border-radius: 0.5em 0.5em 0 0;
+    overflow: hidden;
+}
+
+.accordion .title-container {
+    cursor: pointer;
+    display: flex;
+    padding-block: 0.6em;
+}
+
+.accordion .title-container h2 {
+    flex-grow: 1;
+}
+
+.accordion .arrow {
+    scale: 2;
+    transition-duration: .5s;
+}
+
+.accordion .content {
+    padding-block: .5em;
+    display: none;
+}
+
+.accordion.open .arrow {
+    rotate: 180deg;
+}
+
+.accordion.open .content {
+    display: block;
+}
+
