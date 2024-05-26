@@ -8,6 +8,7 @@ import {
 } from "../../../services/event-bus.service.js";
 import { MailList } from "../cmps/MailList.jsx";
 
+
 function getFilterFromSearchParams(searchParams) {
   const filter = {};
   for (const [key, value] of searchParams.entries()) {
@@ -20,6 +21,7 @@ export function MailIndex() {
   const [mails, setMails] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterBy, setFilterBy] = useState(getFilterFromSearchParams(searchParams));
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     setSearchParams(filterBy);
@@ -65,13 +67,17 @@ export function MailIndex() {
       .catch((err) => showErrorMsg('Failed to mark mail as read'));
   }
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
 
   return (
-    <section className="mail-index">
-      <nav className="sidebar-gmail">
-        <span className="material-icons">menu</span>
-        <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
+    <section className={`mail-index ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+    <span className="material-icons menu-icon" onClick={toggleSidebar}>menu</span>
+    <nav className="sidebar-gmail">
+      <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
         <NavLink className={({ isActive }) => `sidebar-item inbox${isActive ? ' active' : ''}`} to="/mail/inbox">
           <span className="material-icons">inbox</span> Inbox {unreadMailsCount > 0 && `(${unreadMailsCount})`}
         </NavLink>
