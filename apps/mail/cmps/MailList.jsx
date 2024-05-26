@@ -14,8 +14,7 @@ export function MailList({ mails, onRemove, onMarkAsRead }) {
       <ul>
         {mails.map((mail) => (
           <li key={mail.id}>
-            <MailPreview mail={mail} onMarkAsRead={onMarkAsRead} />
-            <button onClick={() => onRemove(mail.id)}>X</button>
+            <MailPreview mail={mail} onMarkAsRead={onMarkAsRead} onRemove={onRemove} />
           </li>
         ))}
       </ul>
