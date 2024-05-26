@@ -28,13 +28,13 @@ nav a:active {
     transition: color 0.3s ease;
   }
   
-  nav a:hover {
+  .app-header nav a:hover {
     background: linear-gradient(45deg, #b14e9d, #3333ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;  }
   
-  .nav-link-active {
+    .app-header .nav-link-active {
     background: linear-gradient(45deg, #b14e9d, #3333ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
