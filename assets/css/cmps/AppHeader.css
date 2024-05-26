@@ -14,3 +14,32 @@ nav a {
 nav a:active {
     color: #0d47a1;
 }
+ 
+  .app-header h3 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 20px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #007bff;
+  }
+  
+  .nav-link-active {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  h3 {
+    background: linear-gradient(45deg, #ff00cc, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
