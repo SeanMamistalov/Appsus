@@ -1,12 +1,12 @@
 const { useState, useEffect } = React;
 const { useSearchParams } = ReactRouterDOM;
+const { NavLink } = ReactRouterDOM
 import { emailService } from "../services/mail.service.js";
 import {
   showSuccessMsg,
   showErrorMsg,
 } from "../../../services/event-bus.service.js";
 import { MailList } from "../cmps/MailList.jsx";
-import { MailSidebar } from "./MailSidebar.jsx";
 
 function getFilterFromSearchParams(searchParams) {
   const filter = {};
@@ -19,16 +19,14 @@ function getFilterFromSearchParams(searchParams) {
 export function MailIndex() {
   const [mails, setMails] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filterBy, setFilterBy] = useState(
-    getFilterFromSearchParams(searchParams)
-  );
+  const [filterBy, setFilterBy] = useState(getFilterFromSearchParams(searchParams));
 
   useEffect(() => {
     setSearchParams(filterBy);
     emailService
       .query(filterBy)
       .then((mails) => setMails(mails))
-      .catch((err) => showErrorMsg("Failed to fetch notes"));
+      .catch((err) => showErrorMsg('Failed to fetch notes'));
   }, [filterBy, setSearchParams]);
 
   function onSetFilterBy(newFilter) {
@@ -43,7 +41,7 @@ export function MailIndex() {
         showSuccessMsg(`mail ${mailId} removed successfully!`);
       })
       .catch((err) => {
-        showErrorMsg("Failed to remove mail");
+        showErrorMsg('Failed to remove mail');
       });
   }
 
@@ -60,12 +58,36 @@ export function MailIndex() {
           });
         });
       })
-      .catch((err) => showErrorMsg("Failed to mark mail as read"));
+      .then(() => {
+        const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
+        console.log('Unread mails count:', unreadMailsCount);
+      })
+      .catch((err) => showErrorMsg('Failed to mark mail as read'));
   }
+
+  const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
 
   return (
     <section className="mail-index">
-      <MailSidebar />
+      <nav className="sidebar-gmail">
+        <span className="material-icons">menu</span>
+        <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
+        <NavLink className={({ isActive }) => `sidebar-item inbox${isActive ? ' active' : ''}`} to="/mail/inbox">
+          <span className="material-icons">inbox</span> Inbox {unreadMailsCount > 0 && `(${unreadMailsCount})`}
+        </NavLink>
+        <NavLink className={({ isActive }) => "sidebar-item starred" + (isActive ? " active" : "")} to="/mail/starred">
+          <span className="material-icons">star</span> Starred
+        </NavLink>
+        <NavLink className={({ isActive }) => "sidebar-item sent" + (isActive ? " active" : "")} to="/mail/sentEmails">
+          <span className="material-icons">send</span> Sent
+        </NavLink>
+        <NavLink className={({ isActive }) => "sidebar-item trash" + (isActive ? " active" : "")} to="/mail/trash">
+          <span className="material-icons">delete</span> Trash
+        </NavLink>
+        <NavLink className={({ isActive }) => "sidebar-item drafts" + (isActive ? " active" : "")} to="/mail/drafts">
+          <span className="material-icons">drafts</span> Drafts
+        </NavLink>
+      </nav>
       <MailList mails={mails} onRemove={removeMail} onMarkAsRead={markAsRead} />
     </section>
   );
