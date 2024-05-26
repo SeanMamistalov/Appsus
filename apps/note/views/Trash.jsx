@@ -27,19 +27,23 @@ export function Trash() {
     return (
         <section className="note-index-container">
             <div className="note-list-container">
-                <ul className="note-list">
-                    {trashedNotes.map(note => (
-                        <li key={note.id} className="note-item">
-                            <h3>{note.info.title}</h3>
-                            <p>{note.info.txt}</p>
-                            <div className="buttons-container">
-                                <button className="icon-button" onClick={() => restoreNote(note.id)}>
-                                    <span className="material-icons icon">restore</span>
-                                </button>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                {trashedNotes.length === 0 ? (
+                    <div className="empty-message">No notes in the trash...</div>
+                ) : (
+                    <ul className="note-list">
+                        {trashedNotes.map(note => (
+                            <li key={note.id} className="note-item">
+                                <h3>{note.info.title}</h3>
+                                <p>{note.info.txt}</p>
+                                <div className="buttons-container">
+                                    <button className="icon-button" onClick={() => restoreNote(note.id)}>
+                                        <span className="material-icons icon">restore</span>
+                                    </button>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
         </section>
     )
