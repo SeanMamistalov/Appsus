@@ -51,3 +51,18 @@
 .mail-preview:hover .email-time {
   display: none;
 }
+.star-icon {
+  cursor: pointer;
+  border: none;
+  margin: 5px;
+  background: none;
+}
+
+.star-icon:hover {
+  color: grey;
+  border-radius: 50%;
+}
+
+.starred {
+  background-color: yellow;
+}
