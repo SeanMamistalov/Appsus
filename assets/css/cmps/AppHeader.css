@@ -10,10 +10,6 @@
 nav a {
     margin: .5em;
 }
-
-nav a:active {
-    color: #0d47a1;
-}
  
   .app-header h3 {
     margin: 0;
@@ -21,6 +17,7 @@ nav a:active {
   }
   
   nav a {
+    
     text-decoration: none;
     color: #333;
     margin-left: 20px;
@@ -42,7 +39,7 @@ nav a:active {
   }
   
   .app-header h3 {
-    background: linear-gradient(45deg, #ff00cc, #3333ff);
+    background: linear-gradient(45deg, #b14e9d, #3333ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
