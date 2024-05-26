@@ -38,6 +38,5 @@ export function BookIndex() {
         <Link to="/book/edit"><button className='add-edit-book'>Add a book</button></Link>
         <BookFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
         {<BookList books={books} onRemove={removeBook}/>}
-        <h2>hello</h2>
     </section>
 }
