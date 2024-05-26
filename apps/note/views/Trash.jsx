@@ -24,11 +24,20 @@ export function Trash() {
             .catch(err => showErrorMsg('Failed to restore note'))
     }
 
+    function deleteNotePermanently(noteId) {
+        noteService.deletePermanently(noteId)
+            .then(() => {
+                setTrashedNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+                showSuccessMsg(`Note ${noteId} deleted permanently!`)
+            })
+            .catch(err => showErrorMsg('Failed to delete note'))
+    }
+
     return (
         <section className="note-index-container">
             <div className="note-list-container">
                 {trashedNotes.length === 0 ? (
-                    <div className="empty-message">No notes in the trash...</div>
+                    <div className="empty-message">No notes in the trash</div>
                 ) : (
                     <ul className="note-list">
                         {trashedNotes.map(note => (
@@ -38,6 +47,9 @@ export function Trash() {
                                 <div className="buttons-container">
                                     <button className="icon-button" onClick={() => restoreNote(note.id)}>
                                         <span className="material-icons icon">restore</span>
+                                    </button>
+                                    <button className="icon-button" onClick={() => deleteNotePermanently(note.id)}>
+                                        <span className="material-icons icon">delete_forever</span>
                                     </button>
                                 </div>
                             </li>

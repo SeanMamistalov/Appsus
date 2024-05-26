@@ -37,7 +37,7 @@ export function BookDetails() {
             Currency Code: {book.listPrice.currencyCode}<br />
             On Sale: {book.listPrice.isOnSale ? 'Yes' : 'No'} */}
         </p>
-        <img src={`BooksImages/${book.title}.jpg`} alt="" />
+        <img src={`assets/img/BooksImages/${book.title}.jpg`} alt="" />
         <section className="actions">
             <Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
             <Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>

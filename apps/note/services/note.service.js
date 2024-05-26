@@ -12,7 +12,8 @@ export const noteService = {
     save,
     getEmptyNote,
     getFilterFromSearchParams,
-    togglePin
+    togglePin,
+    deletePermanently
 }
 
 function query(filterBy = {}) {
@@ -38,6 +39,10 @@ function query(filterBy = {}) {
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
         .then(note => note)
+}
+
+function deletePermanently(noteId) {
+    return storageService.remove(NOTE_KEY, noteId)
 }
 
 function remove(noteId) {
