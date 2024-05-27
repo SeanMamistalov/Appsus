@@ -3,6 +3,7 @@ import { utilService } from "../../../services/util.service.js";
 const MAIL_KEY = "emailDB";
 
 _createMails();
+const emails = [];
 
 export const emailService = {
   query,
@@ -17,7 +18,18 @@ export const emailService = {
   getFilterFromSearchParams,
   markAsRead,
   getById,
+  getEmails,
+  sendEmail,
 };
+
+function getEmails() {
+  return Promise.resolve(emails);
+}
+
+function sendEmail(email) {
+  emails.push(email);
+  return Promise.resolve(email);
+}
 
 function get(mailId) {
   return storageService.get(MAIL_KEY, mailId).then((mail) => {

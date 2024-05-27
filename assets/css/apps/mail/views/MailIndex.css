@@ -23,14 +23,14 @@ body {
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  color: #666;
+  color: #202124;
   text-decoration: none;
 }
 
 .sidebar-item:hover {
   background-color: #ddd;
   cursor: pointer;
-  color: #000;
+  color: #202124;
 }
 
 .sidebar-item.active {
@@ -64,3 +64,120 @@ body {
   z-index: 999; 
 }
 
+.menu-icon {
+  cursor: pointer;
+}
+
+
+.compose-btn {
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #c2e7ff;
+  color: #001d35;
+  border: 3px solid #ddd;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.compose-btn:hover {
+  background-color:#c2e7ff;
+  border: 2px solid #ddd;
+
+}
+
+.email-compose {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f2f6fc;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.email-compose h2 {
+  margin: 0;
+  padding: 10px;
+  font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #f2f6fc;
+  color: #041e49;
+  border-bottom: 1px solid #ccc;
+}
+
+.email-compose form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.email-compose label {
+  margin-bottom: 10px;
+  font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222222;
+}
+
+.email-compose input,
+.email-compose textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 19.5px;
+  color: #222222;
+  background-color: #ffffff;
+}
+
+.email-compose button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.email-compose button:hover {
+  background-color: #0056b3;
+}
+
+.success-message {
+  background-color: #202124;
+  color: #ffffff;
+  padding: 10px;
+  border: 1px solid #202124;
+  border-radius: 4px;
+  margin: 10px 20px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.undo-btn,
+.view-btn {
+  color: #8ab4f8;
+  padding: 8px 12px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.undo-btn:hover,
+.view-btn:hover {
+  box-shadow: 0 0 5px #8ab4f8;
+}

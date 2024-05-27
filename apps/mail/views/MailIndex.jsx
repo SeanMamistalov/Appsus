@@ -1,13 +1,12 @@
 const { useState, useEffect } = React;
-const { useSearchParams } = ReactRouterDOM;
-const { NavLink } = ReactRouterDOM
+const { useSearchParams, NavLink } = ReactRouterDOM;
 import { emailService } from "../services/mail.service.js";
 import {
   showSuccessMsg,
   showErrorMsg,
 } from "../../../services/event-bus.service.js";
 import { MailList } from "../cmps/MailList.jsx";
-
+import { EmailCompose } from '../views/MailCompose.jsx';
 
 function getFilterFromSearchParams(searchParams) {
   const filter = {};
@@ -21,7 +20,10 @@ export function MailIndex() {
   const [mails, setMails] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterBy, setFilterBy] = useState(getFilterFromSearchParams(searchParams));
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [emails, setEmails] = useState([]);
+  const [isComposeOpen, setIsComposeOpen] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     setSearchParams(filterBy);
@@ -71,13 +73,34 @@ export function MailIndex() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
+  const handleComposeClick = () => {
+    setIsComposeOpen(!isComposeOpen);
+  };
 
+  const handleEmailSent = (newEmail) => {
+    setEmails([...emails, newEmail]);
+    setIsComposeOpen(false);
+    setShowSuccessMessage(true);
+    setTimeout(() => setShowSuccessMessage(false), 3000); 
+  };
+
+  const handleUndo = () => {
+    console.log('Undo action performed');
+    setShowSuccessMessage(false);
+  };
+
+  const handleViewMessage = () => {
+    console.log('View message action performed');
+  };
+
+  const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
   return (
     <section className={`mail-index ${isSidebarOpen ? 'sidebar-open' : ''}`}>
-    <span className="material-icons menu-icon" onClick={toggleSidebar}>menu</span>
-    <nav className="sidebar-gmail">
-      <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
+      <span className="material-icons menu-icon" onClick={toggleSidebar}>menu</span>
+      <nav className="sidebar-gmail">
+        <button className="compose-btn" onClick={handleComposeClick}>
+          <span className="material-icons">create</span> Compose
+        </button>
         <NavLink className={({ isActive }) => `sidebar-item inbox${isActive ? ' active' : ''}`} to="/mail/inbox">
           <span className="material-icons">inbox</span> Inbox {unreadMailsCount > 0 && `(${unreadMailsCount})`}
         </NavLink>
@@ -94,6 +117,14 @@ export function MailIndex() {
           <span className="material-icons">drafts</span> Drafts
         </NavLink>
       </nav>
+      {isComposeOpen && <EmailCompose onEmailSent={handleEmailSent} />}
+      {showSuccessMessage && (
+        <div className="success-message">
+          Message sent 
+          <button className="undo-btn" onClick={handleUndo}>Undo</button>
+          <button className="view-btn" onClick={handleViewMessage}>View Message</button>
+        </div>
+      )}
       <MailList mails={mails} onRemove={removeMail} onMarkAsRead={markAsRead} />
     </section>
   );
