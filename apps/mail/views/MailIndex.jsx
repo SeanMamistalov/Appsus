@@ -7,6 +7,7 @@ import {
 } from "../../../services/event-bus.service.js";
 import { MailList } from "../cmps/MailList.jsx";
 import { EmailCompose } from '../views/MailCompose.jsx';
+import { EmailFilter } from '../cmps/MailFilter.jsx';
 
 function getFilterFromSearchParams(searchParams) {
   const filter = {};
@@ -24,6 +25,7 @@ export function MailIndex() {
   const [emails, setEmails] = useState([]);
   const [isComposeOpen, setIsComposeOpen] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     setSearchParams(filterBy);
@@ -36,6 +38,15 @@ export function MailIndex() {
   function onSetFilterBy(newFilter) {
     setFilterBy(newFilter);
   }
+
+  const handleSearchQueryChange = (value) => {
+    setSearchQuery(value);
+    setFilterBy({ ...filterBy, search: value });
+  };
+
+  const filteredMails = mails.filter((mail) =>
+    mail.subject.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   function removeMail(mailId) {
     emailService
@@ -98,6 +109,7 @@ export function MailIndex() {
     <section className={`mail-index ${isSidebarOpen ? 'sidebar-open' : ''}`}>
       <span className="material-icons menu-icon" onClick={toggleSidebar}>menu</span>
       <nav className="sidebar-gmail">
+      <img className="gmail-logo" src="assets/img/gmail_logo.png" alt="gmail-logo" />
         <button className="compose-btn" onClick={handleComposeClick}>
           <span className="material-icons">create</span> Compose
         </button>
@@ -125,7 +137,8 @@ export function MailIndex() {
           <button className="view-btn" onClick={handleViewMessage}>View Message</button>
         </div>
       )}
-      <MailList mails={mails} onRemove={removeMail} onMarkAsRead={markAsRead} />
+      <EmailFilter searchQuery={searchQuery} onSearchQueryChange={handleSearchQueryChange} />
+      <MailList mails={filteredMails} onRemove={removeMail} onMarkAsRead={markAsRead} />
     </section>
   );
 }
