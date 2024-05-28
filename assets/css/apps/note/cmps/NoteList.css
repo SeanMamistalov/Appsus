@@ -1,70 +1,50 @@
-.note-index-container {
-    display: flex;
-}
-
 .note-list-container {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    flex: 1 1 auto;
+    padding: 20px;
     overflow-y: auto;
-    padding-left: 250px;
 }
 
 .note-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.note-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    justify-content: space-between;
     padding: 16px;
-}
-
-.note-list .note-item {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 16px;
-}
-
-.note-list li {
-    list-style: none;
-    padding: 16px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
 }
 
-.note-list li:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.note-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .buttons-container {
-    display: none;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.note-list li:hover .buttons-container {
-    display: flex;
+.note-item:hover .buttons-container {
+    opacity: 1;
 }
 
 .icon-button {
     background: none;
     border: none;
-    padding: 0;
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 8px;
 }
 
-.icon {
+.icon-button .icon {
     width: 24px;
     height: 24px;
-    filter: none;
-}
-
-.icon-button:hover .icon {
-    filter: brightness(0.7);
 }

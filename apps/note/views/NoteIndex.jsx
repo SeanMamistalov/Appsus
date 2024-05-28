@@ -44,7 +44,11 @@ export function NoteIndex() {
     function duplicateNote(noteId) {
         noteService.duplicate(noteId)
             .then(duplicatedNote => {
-                setNotes(prevNotes => [...prevNotes, duplicatedNote])  // Add the new note to the state
+                console.log('Duplicated Note:', duplicatedNote)
+                setNotes(prevNotes => {
+                    console.log('Previous Notes:', prevNotes)
+                    return [...prevNotes, duplicatedNote]
+                })
                 showSuccessMsg(`Note ${noteId} duplicated successfully!`)
             })
             .catch(err => showErrorMsg('Failed to duplicate note'))
@@ -52,37 +56,37 @@ export function NoteIndex() {
 
     return (
         <section className="note-index-container">
-            <nav className="sidebar-keep">
-                <NavLink 
-                    className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
-                    to="/note/noteList">
-                    <span className="material-icons">note</span> Notes
-                </NavLink>
-                <NavLink 
-                    className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
-                    to="/note/reminders">
-                    <span className="material-icons">notifications</span> Reminders
-                </NavLink>
-                <NavLink 
-                    className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
-                    to="/note/editLabels">
-                    <span className="material-icons">edit</span> Edit Labels
-                </NavLink>
-                <NavLink 
-                    className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
-                    to="/note/archives">
-                    <span className="material-icons">archive</span> Archives
-                </NavLink>
-                <NavLink 
-                    className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
-                    to="/note/trash">
-                    <span className="material-icons">delete</span> Trash
-                </NavLink>
-            </nav>
-            <div className="content-container">
-                <div className="search-note-container">
-                    <SearchNote search={filterBy} onSearch={setFilterBy} />
-                </div>
+            <div className="search-note-container">
+                <SearchNote search={filterBy} onSearch={setFilterBy} />
+            </div>
+            <div className="main-content">
+                <nav className="sidebar-keep">
+                    <NavLink 
+                        className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
+                        to="/note/noteList">
+                        <span className="material-icons">note</span> Notes
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
+                        to="/note/reminders">
+                        <span className="material-icons">notifications</span> Reminders
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
+                        to="/note/editLabels">
+                        <span className="material-icons">edit</span> Edit Labels
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
+                        to="/note/archives">
+                        <span className="material-icons">archive</span> Archives
+                    </NavLink>
+                    <NavLink 
+                        className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")} 
+                        to="/note/trash">
+                        <span className="material-icons">delete</span> Trash
+                    </NavLink>
+                </nav>
                 <div className="note-list-container">
                     <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote }} />
                 </div>

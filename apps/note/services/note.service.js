@@ -92,12 +92,25 @@ function duplicate(noteId) {
     })
 }
 
-
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
     if (!notes || !notes.length) {
         notes = []
-        for (let i = 0; i < 5; i++) {
+        
+        const imageNote = {
+            id: utilService.makeId(5),
+            createdAt: utilService.randomPastTime().toLocaleString(),
+            type: 'img',
+            isPinned: true,
+            isTrashed: false,
+            info: {
+                title: utilService.makeLorem(2),
+                url: 'assets/img/apple.jpeg'
+            }
+        }
+        notes.push(imageNote)
+
+        for (let i = 0; i < 6; i++) {
             const note = {
                 id: utilService.makeId(5),
                 createdAt: utilService.randomPastTime().toLocaleString(),
@@ -109,8 +122,9 @@ function _createNotes() {
                     txt: utilService.makeLorem(utilService.getRandomIntInclusive(2, 10))
                 }
             }
-            notes.push(note)
+            notes.push(note);
         }
-        utilService.saveToStorage(NOTE_KEY, notes)
+        
+        utilService.saveToStorage(NOTE_KEY, notes);
     }
 }
