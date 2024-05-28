@@ -33,14 +33,14 @@ export function NoteIndex() {
                         if (note.id === noteId) note.isPinned = !note.isPinned
                         return note
                     })
-                    updatedNotes.sort((a, b) => b.isPinned - a.isPinned)
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
                     return updatedNotes
                 })
                 showSuccessMsg(`Note ${noteId} pin status updated successfully!`)
             })
             .catch(err => showErrorMsg('Failed to update pin status'))
     }
-
+    
     function duplicateNote(noteId) {
         noteService.duplicate(noteId)
             .then(duplicatedNote => {
@@ -53,7 +53,7 @@ export function NoteIndex() {
             })
             .catch(err => showErrorMsg('Failed to duplicate note'))
     }
-
+    
     return (
         <section className="note-index-container">
             <div className="search-note-container">

@@ -48,3 +48,14 @@
     width: 24px;
     height: 24px;
 }
+
+@media (max-width: 800px) {
+    .note-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .note-item {
+        flex-basis: calc(50% - 20px);
+    }
+}

@@ -7,8 +7,6 @@ const NOTE_TYPE_COMPONENTS = {
 }
 
 export function NotePreview({ note }) {
-    console.log('Rendering note:', note)
-
     const NoteComponent = NOTE_TYPE_COMPONENTS[note.type] || null
     return (
         <article className="note-preview">

@@ -8,13 +8,11 @@ export function NoteList() {
         <section className="note-list">
             {notes.map(note => (
                 <div key={note.id} className="note-item">
-                    <div className="note-content">
-                        <NotePreview note={note} />
-                    </div>
-                    <div className="buttons-container">
-                        <button onClick={() => onTogglePin(note.id)} className="icon-button">
+                        <button onClick={() => onTogglePin(note.id)} className="icon-button pin-button">
                             <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
                         </button>
+                    <NotePreview note={note} />
+                    <div className="buttons-container">
                         <button onClick={() => onRemove(note.id)} className="icon-button">
                             <img className="icon" src="assets/img/delete.svg" alt="Delete Icon" />
                         </button>
@@ -45,3 +43,6 @@ export function NoteList() {
         </section>
     )
 }
+
+
+
