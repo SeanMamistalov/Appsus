@@ -13,7 +13,8 @@ export const noteService = {
     getEmptyNote,
     getFilterFromSearchParams,
     togglePin,
-    deletePermanently
+    deletePermanently,
+    duplicate,
 }
 
 function query(filterBy = {}) {
@@ -79,6 +80,18 @@ function togglePin(noteId) {
             return save(note)
         })
 }
+
+function duplicate(noteId) {
+    return get(noteId).then(note => {
+        const newNote = {
+            ...note,
+            id: utilService.makeId(5),
+            createdAt: new Date().toLocaleString()
+        }
+        return save(newNote).then(() => newNote)
+    })
+}
+
 
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)

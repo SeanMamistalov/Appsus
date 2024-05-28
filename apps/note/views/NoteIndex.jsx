@@ -24,7 +24,7 @@ export function NoteIndex() {
             })
             .catch(err => showErrorMsg('Failed to move note to trash'))
     }
-    
+
     function togglePinNote(noteId) {
         noteService.togglePin(noteId)
             .then(() => {
@@ -33,12 +33,21 @@ export function NoteIndex() {
                         if (note.id === noteId) note.isPinned = !note.isPinned
                         return note
                     })
-                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
+                    updatedNotes.sort((a, b) => b.isPinned - a.isPinned)
                     return updatedNotes
                 })
                 showSuccessMsg(`Note ${noteId} pin status updated successfully!`)
             })
             .catch(err => showErrorMsg('Failed to update pin status'))
+    }
+
+    function duplicateNote(noteId) {
+        noteService.duplicate(noteId)
+            .then(duplicatedNote => {
+                setNotes(prevNotes => [...prevNotes, duplicatedNote])  // Add the new note to the state
+                showSuccessMsg(`Note ${noteId} duplicated successfully!`)
+            })
+            .catch(err => showErrorMsg('Failed to duplicate note'))
     }
 
     return (
@@ -75,10 +84,9 @@ export function NoteIndex() {
                     <SearchNote search={filterBy} onSearch={setFilterBy} />
                 </div>
                 <div className="note-list-container">
-                    <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote }} />
+                    <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote }} />
                 </div>
             </div>
         </section>
     )
 }
-
