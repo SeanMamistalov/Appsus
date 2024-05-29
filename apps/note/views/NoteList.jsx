@@ -1,17 +1,20 @@
+const { useState } = React
 import { NotePreview } from "../cmps/NotePreview.jsx"
+import { ColorPicker } from "../cmps/dynamic-note/ColorInput.jsx"
 const { useOutletContext } = ReactRouterDOM
 
 export function NoteList() {
-    const { notes, onRemove, onTogglePin, onDuplicate } = useOutletContext()
+    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor } = useOutletContext()
+    const [showColorPicker, setShowColorPicker] = useState(null)
 
     return (
         <section className="note-list">
             {notes.map(note => (
-                <div key={note.id} className="note-item">
-                        <button onClick={() => onTogglePin(note.id)} className="icon-button pin-button">
-                            <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
-                        </button>
-                    <NotePreview note={note} />
+                <div key={note.id} className="note-item" style={{ backgroundColor: note.backgroundColor || 'white' }}>
+                    <button onClick={() => onTogglePin(note.id)} className="icon-button pin-button">
+                        <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
+                    </button>
+                    <NotePreview note={note} onUpdateColor={onUpdateColor} />
                     <div className="buttons-container">
                         <button onClick={() => onRemove(note.id)} className="icon-button">
                             <img className="icon" src="assets/img/delete.svg" alt="Delete Icon" />
@@ -25,7 +28,7 @@ export function NoteList() {
                         <button className="icon-button">
                             <img className="icon" src="assets/img/edit.svg" alt="Edit Icon" />
                         </button>
-                        <button className="icon-button">
+                        <button className="icon-button" onClick={() => setShowColorPicker(note.id)}>
                             <img className="icon" src="assets/img/palette.svg" alt="Palette Icon" />
                         </button>
                         <button className="icon-button">
@@ -38,11 +41,11 @@ export function NoteList() {
                             <img className="icon" src="assets/img/more.svg" alt="More Icon" />
                         </button>
                     </div>
+                    {showColorPicker === note.id && (
+                        <ColorPicker noteId={note.id} onSetColor={onUpdateColor} currentColor={note.backgroundColor} />
+                    )}
                 </div>
             ))}
         </section>
     )
 }
-
-
-

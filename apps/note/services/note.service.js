@@ -15,6 +15,7 @@ export const noteService = {
     togglePin,
     deletePermanently,
     duplicate,
+    updateColor
 }
 
 function query(filterBy = {}) {
@@ -90,6 +91,13 @@ function duplicate(noteId) {
         }
         return save(newNote).then(() => newNote)
     })
+}
+
+function updateColor(noteId, color) {
+    return get(noteId).then(note => {
+        note.backgroundColor = color;
+        return save(note);
+    });
 }
 
 function _createNotes() {

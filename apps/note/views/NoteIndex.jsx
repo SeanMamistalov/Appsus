@@ -53,6 +53,17 @@ export function NoteIndex() {
             })
             .catch(err => showErrorMsg('Failed to duplicate note'))
     }
+
+    function updateNoteColor(noteId, color) {
+        noteService.updateColor(noteId, color)
+            .then(updatedNote => {
+                setNotes(prevNotes => {
+                    return prevNotes.map(note => note.id === noteId ? updatedNote : note)
+                });
+                showSuccessMsg(`Note ${noteId} color updated successfully!`)
+            })
+            .catch(err => showErrorMsg('Failed to update note color'));
+    }    
     
     return (
         <section className="note-index-container">
@@ -88,7 +99,7 @@ export function NoteIndex() {
                     </NavLink>
                 </nav>
                 <div className="note-list-container">
-                    <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote }} />
+                <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote, onUpdateColor: updateNoteColor }} />
                 </div>
             </div>
         </section>

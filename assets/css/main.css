@@ -23,6 +23,7 @@
 @import './apps/note/views/SidebarNote.css';
 @import './apps/note/cmps/NoteList.css';
 @import './apps/note/cmps/SearchNote.css';
+@import './apps/note/cmps/ColorInput.css';
 
 /* Cmps missBooks*/
 @import './apps/missBooks/cmps/BookDetails.css';
