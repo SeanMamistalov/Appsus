@@ -1,6 +1,7 @@
+const { useState, useEffect } = React
+
 import { noteService } from '../services/note.service.js'
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
-const { useState, useEffect } = React
 
 export function Trash() {
     const [trashedNotes, setTrashedNotes] = useState([])

@@ -1,12 +1,15 @@
-const { useState } = React
-
-export function ColorPicker({ noteId, onSetColor, currentColor }) {
-    const [showColorPicker, setShowColorPicker] = useState(false)
-    const colors = ['#fff', '#ffb4b4', '#b4ffe0', '#b4b7ff', '#f9b4ff', '#c0e794', '#91c6f0']
+export function ColorPicker({ noteId, onSetColor, currentColor, closeColorPicker }) {
+    const colors = ['#fff',
+        '#ffb4b4',
+        '#b4ffe0',
+        '#b4b7ff',
+        '#f9b4ff',
+        '#c0e794',
+        '#91c6f0']
 
     function handleSetColor(color) {
         onSetColor(noteId, color)
-        setShowColorPicker(false)
+        closeColorPicker()
     }
 
     return (
@@ -21,7 +24,7 @@ export function ColorPicker({ noteId, onSetColor, currentColor }) {
                     />
                 ))}
             </div>
-            <button onClick={() => setShowColorPicker(false)}>Close</button>
+            <button onClick={closeColorPicker}>Close</button>
         </section>
     )
 }

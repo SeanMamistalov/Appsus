@@ -1,6 +1,6 @@
-import { ColorPicker } from "./dynamic-note/ColorInput.jsx";
-
 const { useState } = React
+
+import { ColorPicker } from "./dynamic-note/ColorInput.jsx"
 
 export function NoteColor() {
     const [cmpType, setCmpType] = useState('color')

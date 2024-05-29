@@ -1,7 +1,8 @@
 const { useState } = React
+const { useOutletContext } = ReactRouterDOM
+
 import { NotePreview } from "../cmps/NotePreview.jsx"
 import { ColorPicker } from "../cmps/dynamic-note/ColorInput.jsx"
-const { useOutletContext } = ReactRouterDOM
 
 export function NoteList() {
     const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor } = useOutletContext()
@@ -42,7 +43,12 @@ export function NoteList() {
                         </button>
                     </div>
                     {showColorPicker === note.id && (
-                        <ColorPicker noteId={note.id} onSetColor={onUpdateColor} currentColor={note.backgroundColor} />
+                        <ColorPicker
+                            noteId={note.id}
+                            onSetColor={onUpdateColor}
+                            currentColor={note.backgroundColor}
+                            closeColorPicker={() => setShowColorPicker(null)}
+                        />
                     )}
                 </div>
             ))}
