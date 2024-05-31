@@ -10,7 +10,7 @@ export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchParams))
-    const [showAddNoteForm, setShowAddNoteForm] = useState(false);
+    const [showAddNoteForm, setShowAddNoteForm] = useState(false)
 
     useEffect(() => {
         setSearchParams(filterBy)
@@ -51,7 +51,7 @@ export function NoteIndex() {
                 console.log('Duplicated Note:', duplicatedNote)
                 setNotes(prevNotes => {
                     const updatedNotes = [...prevNotes, duplicatedNote]
-                    updatedNotes.sort((a, b) => b.isPinned - a.isPinned)
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
                     return updatedNotes
                 })
                 showSuccessMsg(`Note ${noteId} duplicated successfully!`)
@@ -74,14 +74,14 @@ export function NoteIndex() {
     }
 
     function addNote(newNote) {
-        noteService.save(newNote)
+        return noteService.save(newNote)
             .then(savedNote => {
                 setNotes(prevNotes => {
                     const updatedNotes = [...prevNotes, savedNote]
-                    updatedNotes.sort((a, b) => b.isPinned - a.isPinned)
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
                     return updatedNotes
                 })
-                showSuccessMsg(`Note added successfully!`)
+                showSuccessMsg('Note added successfully!')
                 setShowAddNoteForm(false)
             })
             .catch(err => showErrorMsg('Failed to add note'))

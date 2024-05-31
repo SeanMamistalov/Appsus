@@ -8,12 +8,14 @@ const NOTE_TYPE_COMPONENTS = {
 
 export function NotePreview({ note }) {
     const NoteComponent = NOTE_TYPE_COMPONENTS[note.type] || null
+    const { title = 'Untitled', createdAt = '', type = '' } = note.info || {}
+
     return (
         <article className="note-preview">
-            <h3>Title: {note.info.title}</h3>
+            <h3>Title: {title}</h3>
             <p>
-                Created At: {note.createdAt}<br />
-                Type: {note.type}<br />
+                Created At: {createdAt}<br />
+                Type: {type}<br />
             </p>
             {NoteComponent ? <NoteComponent info={note.info} /> : <p>Unsupported note type</p>}
         </article>

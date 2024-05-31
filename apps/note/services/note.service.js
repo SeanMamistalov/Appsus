@@ -63,9 +63,19 @@ function save(note) {
     }
 }
 
-// function getEmptyNote(type = '', title = '') {
-//     return { type, title }
-// }
+function getEmptyNote(type = '', title = '') {
+    return {
+        type,
+        info: {
+            title,
+            txt: '',
+            url: '',
+        },
+        backgroundColor: '#ffffff',
+        isPinned: true,
+        isTrashed: false,
+    }
+}
 
 function getFilterFromSearchParams(searchParams) {
     return {
@@ -95,23 +105,9 @@ function duplicate(noteId) {
 
 function updateColor(noteId, color) {
     return get(noteId).then(note => {
-        note.backgroundColor = color;
-        return save(note);
-    });
-}
-
-function getEmptyNote() {
-    return {
-        id: utilService.makeId(5),
-        createdAt: new Date().toLocaleString(),
-        type: 'txt',
-        isPinned: false,
-        isTrashed: false,
-        info: {
-            title: '',
-            txt: ''
-        }
-    };
+        note.backgroundColor = color
+        return save(note)
+    })
 }
 
 function _createNotes() {
