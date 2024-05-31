@@ -4,11 +4,13 @@ const { NavLink, Outlet, useSearchParams } = ReactRouterDOM
 import { noteService } from '../services/note.service.js'
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 import { SearchNote } from '../cmps/SearchNote.jsx'
+import { AddNoteForm } from '../cmps/AddNote.jsx'
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchParams))
+    const [showAddNoteForm, setShowAddNoteForm] = useState(false);
 
     useEffect(() => {
         setSearchParams(filterBy)
@@ -43,16 +45,21 @@ export function NoteIndex() {
     }
 
     function duplicateNote(noteId) {
+        console.log('Duplicating note:', noteId)
         noteService.duplicate(noteId)
             .then(duplicatedNote => {
                 console.log('Duplicated Note:', duplicatedNote)
                 setNotes(prevNotes => {
-                    console.log('Previous Notes:', prevNotes)
-                    return [...prevNotes, duplicatedNote]
+                    const updatedNotes = [...prevNotes, duplicatedNote]
+                    updatedNotes.sort((a, b) => b.isPinned - a.isPinned)
+                    return updatedNotes
                 })
                 showSuccessMsg(`Note ${noteId} duplicated successfully!`)
             })
-            .catch(err => showErrorMsg('Failed to duplicate note'))
+            .catch(err => {
+                console.error('Failed to duplicate note:', err)
+                showErrorMsg('Failed to duplicate note')
+            })
     }
 
     function updateNoteColor(noteId, color) {
@@ -60,10 +67,24 @@ export function NoteIndex() {
             .then(updatedNote => {
                 setNotes(prevNotes => {
                     return prevNotes.map(note => note.id === noteId ? updatedNote : note)
-                });
+                })
                 showSuccessMsg(`Note ${noteId} color updated successfully!`)
             })
-            .catch(err => showErrorMsg('Failed to update note color'));
+            .catch(err => showErrorMsg('Failed to update note color'))
+    }
+
+    function addNote(newNote) {
+        noteService.save(newNote)
+            .then(savedNote => {
+                setNotes(prevNotes => {
+                    const updatedNotes = [...prevNotes, savedNote]
+                    updatedNotes.sort((a, b) => b.isPinned - a.isPinned)
+                    return updatedNotes
+                })
+                showSuccessMsg(`Note added successfully!`)
+                setShowAddNoteForm(false)
+            })
+            .catch(err => showErrorMsg('Failed to add note'))
     }
 
     return (
@@ -72,6 +93,9 @@ export function NoteIndex() {
                 <SearchNote search={filterBy} onSearch={setFilterBy} />
             </div>
             <div className="main-content">
+                <button onClick={() => setShowAddNoteForm(true)} className="add-note-button">
+                    Add Note
+                </button>
                 <nav className="sidebar-keep">
                     <NavLink
                         className={({ isActive }) => "sidebar-keep-item" + (isActive ? " active" : "")}
@@ -102,6 +126,7 @@ export function NoteIndex() {
                 <div className="note-list-container">
                     <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote, onUpdateColor: updateNoteColor }} />
                 </div>
+                {showAddNoteForm && <AddNoteForm onClose={() => setShowAddNoteForm(false)} onSave={addNote} />}
             </div>
         </section>
     )

@@ -21,7 +21,7 @@ export function NoteList() {
                             <img className="icon" src="assets/img/delete.svg" alt="Delete Icon" />
                         </button>
                         <button onClick={() => onDuplicate(note.id)} className="icon-button">
-                            <img className="icon" src="assets/img/duplicate.svg" alt="Duplicate Icon" />
+                            <img className="icon" src="assets/img/more.svg" alt="Duplicate Icon" />
                         </button>
                         <button className="icon-button">
                             <img className="icon" src="assets/img/reminder.svg" alt="Reminder Icon" />
