@@ -64,13 +64,19 @@ function save(note) {
 }
 
 function getEmptyNote(type = '', title = '') {
+    const emptyInfo = {
+        title,
+        txt: '',
+        url: '',
+    }
+
+    if (type === 'recording') {
+        emptyInfo.url = ''
+    }
+
     return {
         type,
-        info: {
-            title,
-            txt: '',
-            url: '',
-        },
+        info: emptyInfo,
         backgroundColor: '#ffffff',
         isPinned: true,
         isTrashed: false,
@@ -122,11 +128,25 @@ function _createNotes() {
             isPinned: true,
             isTrashed: false,
             info: {
-                title: utilService.makeLorem(2),
+                title: 'NoteImg',
                 url: 'assets/img/apple.jpeg'
             }
         }
         notes.push(imageNote)
+
+        const recordingNote = {
+            id: utilService.makeId(5),
+            createdAt: utilService.randomPastTime().toLocaleString(),
+            type: 'recording',
+            isPinned: true,
+            isTrashed: false,
+            info: {
+                title: 'NoteAudio',
+                url: 'assets/audio/be-happy.mp3'
+            }
+            
+        }
+        notes.push(recordingNote)
 
         for (let i = 0; i < 6; i++) {
             const note = {
@@ -140,9 +160,8 @@ function _createNotes() {
                     txt: utilService.makeLorem(utilService.getRandomIntInclusive(2, 10))
                 }
             }
-            notes.push(note);
+            notes.push(note)
         }
-        
-        utilService.saveToStorage(NOTE_KEY, notes);
+        utilService.saveToStorage(NOTE_KEY, notes)
     }
 }

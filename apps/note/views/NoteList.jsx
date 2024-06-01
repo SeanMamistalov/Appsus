@@ -1,8 +1,8 @@
 const { useState } = React
 const { useOutletContext } = ReactRouterDOM
 
+import { ColorPicker } from "../cmps/ColorInput.jsx"
 import { NotePreview } from "../cmps/NotePreview.jsx"
-import { ColorPicker } from "../cmps/dynamic-note/ColorInput.jsx"
 
 export function NoteList() {
     const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor } = useOutletContext()
@@ -21,7 +21,7 @@ export function NoteList() {
                             <img className="icon" src="assets/img/delete.svg" alt="Delete Icon" />
                         </button>
                         <button onClick={() => onDuplicate(note.id)} className="icon-button">
-                            <img className="icon" src="assets/img/more.svg" alt="Duplicate Icon" />
+                            <img className="icon" src="assets/img/duplicate.svg" alt="Duplicate Icon" />
                         </button>
                         <button className="icon-button">
                             <img className="icon" src="assets/img/reminder.svg" alt="Reminder Icon" />
