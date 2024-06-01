@@ -155,24 +155,165 @@ function _setNextPrevMailId(mail) {
   });
 }
 
+// function _createMails() {
+//   let mails = utilService.loadFromStorage(MAIL_KEY);
+//   if (!mails || !mails.length) {
+//     mails = [];
+//     for (let i = 0; i < 5; i++) {
+//       const newMail = {
+//         id: utilService.makeId(6),
+//         subject: utilService.makeLorem(2),
+//         body: utilService.makeLorem(50),
+//         isRead: false,
+//         sentAt: utilService.randomPastTime(),
+//         removedAt: null,
+//         from: `AppsusUser${i}@gmail.com`,
+//         to: "AppsusReceive@Appsus.com",
+//       };
+//       mails.push(newMail);
+//     }
+//     utilService.saveToStorage(MAIL_KEY, mails);
+//   }
+//   return mails;
+// }
+
+
 function _createMails() {
-  let mails = utilService.loadFromStorage(MAIL_KEY);
+  let mails = utilService.loadFromStorage(MAIL_KEY)
   if (!mails || !mails.length) {
-    mails = [];
-    for (let i = 0; i < 5; i++) {
-      const newMail = {
-        id: utilService.makeId(6),
-        subject: utilService.makeLorem(2),
-        body: utilService.makeLorem(50),
-        isRead: false,
-        sentAt: utilService.randomPastTime(),
-        removedAt: null,
-        from: `AppsusUser${i}@gmail.com`,
-        to: "AppsusReceive@Appsus.com",
-      };
-      mails.push(newMail);
-    }
-    utilService.saveToStorage(MAIL_KEY, mails);
+
+      mails = [{
+          id: 'e101',
+          subject: 'Miss you!',
+          body: 'Would love to catch up sometimes',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1551133930594,
+          removedAt: null,
+          from: 'momo@momo.com',
+          to: 'user@appsus.com',
+          labels: []
+      }, {
+          id: 'e102',
+          subject: 'Happy to see you!',
+          body: 'I was so happy to see you yesterday at the club would like to meet.',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1521133930594,
+          removedAt: null,
+          from: 'MamistalovSean@gmail.com',
+          to: 'user@appsus.com',
+          labels: []
+      }, {
+          id: 'e103',
+          subject: 'Gift!',
+          body: 'Hello, you have a secret gift waiting for you in this email',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1351133932594,
+          removedAt: null,
+          from: 'DanielYacovi@gmail.com',
+          to: 'user@appsus.com',
+          labels: []
+      },
+      {
+          id: 'e104',
+          subject: 'Miss you!',
+          body: 'Would love to catch up sometimes',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1531133933594,
+          removedAt: null,
+          from: 'vickypolatov@gmail.com',
+          to: 'user@appsus.com',
+          labels: []
+      },
+      {
+          id: 'e105',
+          subject: 'Coding Academy OctEve2023-4!',
+          body: 'Coding is life',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1251122930594,
+          removedAt: null,
+          from: 'YaronBiton@gmail.com',
+          to: 'user@appsus.com',
+          labels: []
+      },
+      {
+          id: 'e106',
+          subject: 'Appsus',
+          body: 'I believe my app is the best!',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1651122933594,
+          removedAt: null,
+          from: 'user@appsus.com',
+          to: 'CodingAcademy@gmail.com',
+          labels: []
+      },
+      {
+          id: 'e107',
+          subject: 'Hey hey',
+          body: 'what is goin on? ',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1622323930594,
+          removedAt: null,
+          from: 'user@appsus.com',
+          to: 'reut@yahoo.com',
+          labels: []
+      }, {
+          id: 'e108',
+          subject: 'Are we good enough?',
+          body: 'I believe you are good enough',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1422322230294,
+          removedAt: null,
+          from: 'good@appsus.com',
+          to: 'user@appsus.com',
+          labels: []
+      }, {
+          id: 'e109',
+          subject: 'Wow what a react project!',
+          body: 'Amazing project Sean and Daniel!',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1622322930222,
+          removedAt: null,
+          from: 'reactMaker@appsus.com',
+          to: 'user@appsus.com',
+          labels: []
+      }, {
+          id: 'e110',
+          subject: 'Timeline',
+          body: 'How are you Sean ? hows goin on with the sprint?',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1622444430222,
+          removedAt: null,
+          from: 'WhoIsIt@gmail.com',
+          to: 'user@appsus.com',
+          labels: []
+      },
+      {
+          id: 'e111',
+          subject: 'Thanks for applying!',
+          body: 'Thanks for applying, you are overqualified for us.',
+          isRead: false,
+          isStarred: false,
+          sentAt: 1655544430222,
+          removedAt: null,
+          from: 'FantasyJob@Fantasy.com',
+          to: 'user@appsus.com',
+          labels: []
+      },
+
+
+      ]
+
+      utilService.saveToStorage(MAIL_KEY, mails)
   }
-  return mails;
+
 }
