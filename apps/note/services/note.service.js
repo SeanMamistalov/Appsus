@@ -15,7 +15,8 @@ export const noteService = {
     togglePin,
     deletePermanently,
     duplicate,
-    updateColor
+    updateColor,
+    archive
 }
 
 function query(filterBy = {}) {
@@ -116,6 +117,14 @@ function updateColor(noteId, color) {
     })
 }
 
+function archive(noteId) {
+    return get(noteId)
+        .then(note => {
+            note.isArchived = true
+            return save(note)
+        })
+}
+
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
     if (!notes || !notes.length) {
@@ -127,6 +136,7 @@ function _createNotes() {
             type: 'img',
             isPinned: true,
             isTrashed: false,
+            isArchived: false,
             info: {
                 title: 'NoteImg',
                 url: 'assets/img/apple.jpeg'
@@ -140,6 +150,7 @@ function _createNotes() {
             type: 'recording',
             isPinned: true,
             isTrashed: false,
+            isArchived: false,
             info: {
                 title: 'NoteAudio',
                 url: 'assets/audio/be-happy.mp3'
@@ -155,6 +166,7 @@ function _createNotes() {
                 type: 'txt',
                 isPinned: true,
                 isTrashed: false,
+                isArchived: false,
                 info: {
                     title: utilService.makeLorem(2),
                     txt: utilService.makeLorem(utilService.getRandomIntInclusive(2, 10))

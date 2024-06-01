@@ -5,16 +5,18 @@ import { ColorPicker } from "../cmps/ColorInput.jsx"
 import { NotePreview } from "../cmps/NotePreview.jsx"
 
 export function NoteList() {
-    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor } = useOutletContext();
-    const [showColorPicker, setShowColorPicker] = useState(null);
+    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor, onArchive } = useOutletContext();
+    const [showColorPicker, setShowColorPicker] = useState(null)
 
     return (
         <section className="note-list">
             {notes.map(note => (
                 <div key={note.id} className="note-item" style={{ backgroundColor: note.backgroundColor || 'white' }}>
-                    <button onClick={() => onTogglePin(note.id)} className="icon-button pin-button">
-                        <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
-                    </button>
+                    <div className="pin-container">
+                        <button onClick={() => onTogglePin(note.id)} className="icon-button pin-button">
+                            <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
+                        </button>
+                    </div>
                     <NotePreview note={note} onUpdateColor={onUpdateColor} />
                     <div className="buttons-container">
                         <button onClick={() => onRemove(note.id)} className="icon-button">
@@ -32,9 +34,10 @@ export function NoteList() {
                         <button className="icon-button">
                             <img className="icon" src="assets/img/add_img.svg" alt="Add Image Icon" />
                         </button>
-                        <button className="icon-button">
+                        <button onClick={() => onArchive(note.id)} className="icon-button">
                             <img className="icon" src="assets/img/archive.svg" alt="Archive Icon" />
                         </button>
+
                     </div>
                     {showColorPicker === note.id && (
                         <ColorPicker
