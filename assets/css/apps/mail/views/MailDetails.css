@@ -1,43 +1,39 @@
-.mail-details {
-    padding: 20px;
-    border: 1px solid #dadce0;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
-    max-width: 800px;
-    margin: 20px auto;
-  }
-  
-  .mail-details button {
-    background-color: #7893b8;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .mail-details button:hover {
-    background-color: #7893b8;
-  }
-  
-  .mail-details p {
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  
-  .mail-details .actions {
-    margin-top: 20px;
-  }
-  
-  .mail-details .actions button {
-    background-color: #ffffff;
-    color: #1a73e8;
-    border: 1px solid #7893b8;
-  }
-  
-  .mail-details .actions button:hover {
-    background-color: #f1f8ff;
-  }
-  
+.email-details-container {
+  padding: 1em;
+  padding-top: 0;
+}
+
+.date-and-from-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.email-subject {
+  margin-bottom: 1rem;
+}
+
+.icons-container {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.email-details-icon {
+  cursor: pointer;
+  font-size: 1.3rem;
+  padding: 7px;
+}
+
+.email-details-icon:hover {
+  border-radius: 50%;
+  background-color: #EAEBEF;
+}
+
+
+.fa-arrow-left {
+  margin-right: auto;
+}
+
