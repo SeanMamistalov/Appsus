@@ -9,9 +9,9 @@ export function AddNoteForm({ onClose, onSave }) {
     const navigate = useNavigate()
 
     function handleChange({ target }) {
-        const { name: prop, value } = target
+        const { name: prop, value } = target;
         setNote(prevNote => {
-            if (prop === 'title' || prop === 'txt' || prop === 'url') {
+            if (prop === 'title' || prop === 'txt') {
                 return {
                     ...prevNote,
                     info: {
@@ -24,7 +24,24 @@ export function AddNoteForm({ onClose, onSave }) {
             }
         })
     }
-    
+
+    function handleFileChange({ target }) {
+        const file = target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNote(prevNote => ({
+                    ...prevNote,
+                    info: {
+                        ...prevNote.info,
+                        url: reader.result
+                    }
+                }))
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
     function handleSave(ev) {
         ev.preventDefault()
         onSave(note)
@@ -39,8 +56,6 @@ export function AddNoteForm({ onClose, onSave }) {
 
     return (
         <section className="note-edit">
-            <h1>Add Note</h1>
-
             <form onSubmit={handleSave}>
                 <label htmlFor="title">Title</label>
                 <input
@@ -76,14 +91,16 @@ export function AddNoteForm({ onClose, onSave }) {
 
                 {note.type === 'img' && (
                     <React.Fragment>
-                        <label htmlFor="url">Image URL</label>
+                        <label htmlFor="file">Upload Image</label>
                         <input
-                            onChange={handleChange}
-                            value={note.url}
-                            id="url"
-                            name="url"
-                            type="text"
-                            placeholder="Image URL" />
+                            onChange={handleFileChange}
+                            id="file"
+                            name="file"
+                            type="file"
+                            accept="image/*" />
+                        {note.info.url && (
+                            <img src={note.info.url} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
+                        )}
                     </React.Fragment>
                 )}
 

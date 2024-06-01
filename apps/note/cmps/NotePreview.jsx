@@ -13,10 +13,6 @@ export function NotePreview({ note }) {
     return (
         <article className="note-preview">
             <h3>Title: {title}</h3>
-            <p>
-                Created At: {createdAt}<br />
-                Type: {type}<br />
-            </p>
             {NoteComponent ? <NoteComponent info={note.info} /> : <p>Unsupported note type</p>}
         </article>
     )
