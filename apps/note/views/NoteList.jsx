@@ -5,8 +5,8 @@ import { ColorPicker } from "../cmps/ColorInput.jsx"
 import { NotePreview } from "../cmps/NotePreview.jsx"
 
 export function NoteList() {
-    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor } = useOutletContext()
-    const [showColorPicker, setShowColorPicker] = useState(null)
+    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor } = useOutletContext();
+    const [showColorPicker, setShowColorPicker] = useState(null);
 
     return (
         <section className="note-list">
@@ -24,9 +24,6 @@ export function NoteList() {
                             <img className="icon" src="assets/img/duplicate.svg" alt="Duplicate Icon" />
                         </button>
                         <button className="icon-button">
-                            <img className="icon" src="assets/img/reminder.svg" alt="Reminder Icon" />
-                        </button>
-                        <button className="icon-button">
                             <img className="icon" src="assets/img/edit.svg" alt="Edit Icon" />
                         </button>
                         <button className="icon-button" onClick={() => setShowColorPicker(note.id)}>
@@ -37,9 +34,6 @@ export function NoteList() {
                         </button>
                         <button className="icon-button">
                             <img className="icon" src="assets/img/archive.svg" alt="Archive Icon" />
-                        </button>
-                        <button className="icon-button">
-                            <img className="icon" src="assets/img/more.svg" alt="More Icon" />
                         </button>
                     </div>
                     {showColorPicker === note.id && (
