@@ -27,17 +27,27 @@ function query(filterBy = {}) {
             } else {
                 notes = notes.filter(note => !note.isTrashed)
             }
+
+            if (filterBy.isArchived !== undefined) {
+                notes = notes.filter(note => note.isArchived === filterBy.isArchived)
+            } else {
+                notes = notes.filter(note => !note.isArchived)
+            }
+
             if (filterBy.title) {
                 const regExp = new RegExp(filterBy.title, 'i')
                 notes = notes.filter(note => regExp.test(note.info.title))
             }
+
             if (filterBy.type) {
                 notes = notes.filter(note => note.type === filterBy.type)
             }
+
             notes.sort((a, b) => a.isPinned - b.isPinned)
             return notes
         })
 }
+
 
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
@@ -81,6 +91,7 @@ function getEmptyNote(type = '', title = '') {
         backgroundColor: '#ffffff',
         isPinned: true,
         isTrashed: false,
+        isArchived: false,
     }
 }
 
@@ -137,10 +148,9 @@ function _createNotes() {
             isPinned: true,
             isTrashed: false,
             isArchived: false,
-            backgroundColor: '#ffb4b4',
             info: {
                 title: 'NoteImg',
-                url: 'assets/img/apple.jpeg'
+                url: 'assets/img/apple.png'
             }
         }
         notes.push(imageNote)
