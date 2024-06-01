@@ -8,7 +8,7 @@ import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
 import { EmailDetails } from "./apps/mail/views/MailDetails.jsx";
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
 import { Trash } from "./apps/note/views/Trash.jsx"
-import { Archives } from "./apps/note/views/Archives.jsx"
+import { Archive } from "./apps/note/views/Archives.jsx"
 import { NoteList } from "./apps/note/views/NoteList.jsx"
 import { Reminders } from "./apps/note/views/Reminders.jsx"
 import { EditLabels } from "./apps/note/views/Editlabels.jsx"
@@ -31,7 +31,7 @@ export function App() {
                     <Route path="/note/noteList" element={<NoteList />}/>
                     <Route path="/note/reminders" element={<Reminders />}/>
                     <Route path="/note/editLabels" element={<EditLabels />}/>
-                    <Route path="/note/archives" element={<Archives />}/>
+                    <Route path="/note/archives" element={<Archive />}/>
                     <Route path="/note/trash" element={<Trash />}/>
                 </Route>
                 <Route path="/book" element={<BookIndex />} />
