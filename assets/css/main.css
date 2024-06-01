@@ -18,6 +18,7 @@
 @import './apps/mail/cmps/MailList.css';
 @import './apps/mail/cmps/MailPreview.css';
 @import './apps/mail/cmps/MailFilter.css';
+@import './apps/mail/cmps/MailCompose.css';
 
 /* Cmps note*/
 @import './apps/note/views/SidebarNote.css';
@@ -26,10 +27,13 @@
 @import './apps/note/cmps/ColorInput.css';
 @import './apps/note/cmps/AddNote.css';
 
-/* Cmps missBooks*/
+/* Cmps books*/
 @import './apps/missBooks/cmps/BookDetails.css';
 @import './apps/missBooks/cmps/BookEdit.css';
 @import './apps/missBooks/cmps/BookFilter.css';
 @import './apps/missBooks/cmps/BookList.css';
 @import './apps/missBooks/cmps/BookPreview.css';
 @import './apps/missBooks/cmps/UserMsg.css';
+
+
+
