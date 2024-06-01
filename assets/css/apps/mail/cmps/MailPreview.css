@@ -1,0 +1,65 @@
+.email-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  transition: background-color 0.2s ease;
+}
+
+.email-item:hover {
+  background-color: white;
+}
+
+.email-sender {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.email-subject {
+  margin-left: 8px;
+  color: var(--secondary-text-color);
+  flex-grow: 1;
+}
+
+.email-time {
+  color: var(--secondary-text-color);
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.email-actions {
+  display: none;
+}
+
+.email-item:hover .email-actions {
+  display: block;
+}
+
+.email-actions .icon {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.email-actions .icon:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.mail-preview:hover .email-time {
+  display: none;
+}
+.star-icon {
+  cursor: pointer;
+  border: none;
+  margin: 5px;
+  background: none;
+}
+
+.star-icon:hover {
+  color: grey;
+  border-radius: 50%;
+}
+

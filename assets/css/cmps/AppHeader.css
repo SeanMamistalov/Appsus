@@ -1,0 +1,46 @@
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f1f3f4; 
+    border-bottom: 1px solid #ddd; 
+    padding: 8px 16px; 
+}
+
+nav a {
+    margin: .5em;
+}
+ 
+  .app-header h3 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  nav a {
+    
+    text-decoration: none;
+    color: #333;
+    margin-left: 20px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .app-header nav a:hover {
+    background: linear-gradient(45deg, #b14e9d, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;  }
+  
+    .app-header .nav-link-active {
+    background: linear-gradient(45deg, #b14e9d, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+  }
+  
+  .app-header h3 {
+    background: linear-gradient(45deg, #b14e9d, #3333ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
