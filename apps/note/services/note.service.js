@@ -137,6 +137,7 @@ function _createNotes() {
             isPinned: true,
             isTrashed: false,
             isArchived: false,
+            backgroundColor: '#ffb4b4',
             info: {
                 title: 'NoteImg',
                 url: 'assets/img/apple.jpeg'
@@ -151,11 +152,11 @@ function _createNotes() {
             isPinned: true,
             isTrashed: false,
             isArchived: false,
+            backgroundColor: '#b4ffe0',
             info: {
                 title: 'NoteAudio',
                 url: 'assets/audio/be-happy.mp3'
             }
-            
         }
         notes.push(recordingNote)
 
