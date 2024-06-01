@@ -3,8 +3,9 @@ const { useParams, useNavigate } = ReactRouter;
 const { Link } = ReactRouterDOM;
 
 import { emailService } from "../services/mail.service.js";
+import { MailIndex } from "../views/MailIndex.jsx";
 
-export function EmailDetails() {
+export function EmailDetails({ removeMail }) {
   const [mail, setMail] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
@@ -12,36 +13,53 @@ export function EmailDetails() {
 
   useEffect(() => {
     setIsLoading(true);
-    emailService
-      .get(params.mailId)
+    emailService.get(params.mailId)
       .then((mail) => {
         setMail(mail);
       })
       .catch(() => {
-        alert("Couldn`t get mail...");
+        alert("Couldn't get mail...");
         navigate("/mail");
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [params.mailId]);
+  }, [params.mailId, navigate]);
 
   if (isLoading) return <h3>Loading...</h3>;
 
+  function getFormattedDate(timestamp) {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString();
+  }
+
   return (
-    <section className="mail-details">
-      <Link to="/mail">
-        <button>X</button>
-      </Link>
+    <section className="email-details-container">
+      <div className="icons-container">
+        <Link to="/mail">
+          <i title="Go back to inbox" className="fa-solid fa-arrow-left email-details-icon"></i>
+        </Link>
+        <i
+          title="Delete email"
+          className="fa-regular fa-trash-can email-details-icon"
+          onClick={() => {
+            removeMail(mail.id);
+            navigate("/mail");
+          }}
+        ></i>
+      </div>
+
+      <h2 className="email-subject">{mail.subject}</h2>
+      <div className="date-and-from-container">
+        <h3>{mail.from}</h3>
+        <span>{getFormattedDate(mail.sentAt)}</span>
+      </div>
+      <span className="to-txt">
+        <span>to </span>
+        {mail.to}
+      </span>
+      <hr />
       <p>{mail.body}</p>
-      <section className="actions">
-        <Link to={`/mail/${mail.prevMailId}`}>
-          <button>Prev</button>
-        </Link>
-        <Link to={`/mail/${mail.nextMailId}`}>
-          <button>Next</button>
-        </Link>
-      </section>
     </section>
   );
 }
