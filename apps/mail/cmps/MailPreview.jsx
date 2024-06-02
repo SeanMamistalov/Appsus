@@ -1,6 +1,5 @@
-const { useState } = React;
-const { Link } = ReactRouterDOM;
-
+const { useState } = React
+const { Link } = ReactRouterDOM
 export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   if (!mail) return null;
 
@@ -15,45 +14,41 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   };
 
   const handleToggleStarred = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); 
     setIsStarred(!isStarred);
-    onToggleStarred(mail.id);
+    // onToggleStarred(mail.id);
   };
 
-  const formattedDate = mail.sentAt ? new Date(mail.sentAt).toLocaleDateString() : '';
-
   return (
-    <div className={`email-row ${isRead ? 'read' : 'unread'}`}>
-      <div className="email-from-content">
-        <div className="email-side-icons-container">
-          <input onClick={(e) => e.stopPropagation()} className='checkbox-input' type="checkbox" />
-          <span onClick={handleToggleStarred}>
-            <i className={`fa-solid fa-star ${isStarred ? 'starred' : 'unstarred'}`}></i>
-          </span>
-        </div>
-        <span className={`email-from-txt ${isRead ? 'read' : 'unread'}`}>{mail.from}</span>
-      </div>
+    <div className={`email-item ${isRead ? 'read' : 'unread'}`}>
       <Link
         to={`/mail/${mail.id}`}
-        className="email-body"
-        style={{ textDecoration: 'none', flex: 2, display: 'flex', alignItems: 'center' }}
+        className="mail-preview"
+        style={{ textDecoration: 'none', display: 'flex', justifyContent: 'space-between', width: '100%' }}
         onClick={handleClick}
       >
-        <span className={isRead ? 'read' : 'unread'}>
-          {mail.subject}
-          <span className="makaf">-</span>
-        </span>
-        <span className="email-body-txt">{mail.text ? mail.text.substring(0, 100) : ''}</span>
+        <div>
+          <span className="email-sender">{mail.from}</span>
+          <span className="email-subject">
+            {mail.subject ? (mail.subject.length > 50 ? mail.subject.substring(0, 47) + '...' : mail.subject) : ''}
+          </span>
+          <span className="email-text">
+            {mail.text ? (mail.text.substring(0, 100)) : ''}
+          </span>
+        </div>
+        <div>
+          <span className="email-time">
+            {mail.sentAt ? (new Date(mail.sentAt).toLocaleTimeString()) : ''}
+          </span>
+        </div>
       </Link>
-      <span className={`email-row-date ${isRead ? 'read' : 'unread'}`}>{formattedDate}</span>
-      <div className={`email-icons-container ${isRead ? 'read' : 'unread'}`}>
-        <span onClick={(e) => { e.stopPropagation(); handleClick(); }}>
-          {isRead ? 
-            <i title="Mark as unread" className="fa-regular fa-envelope email-row-icon"></i> : 
-            <i title="Mark as read" className="fa-regular fa-envelope-open email-row-icon"></i>
-          }
-        </span>
-        <i onClick={(e) => { e.stopPropagation(); onRemove(mail.id); }} title="Delete email" className="fa-regular fa-trash-can email-row-icon"></i>
+      <div className="email-actions">
+        <button className={`icon star-icon ${isStarred ? 'yellow' : ''}`} onClick={handleToggleStarred}>
+          <span className="material-icons">{isStarred ? 'star' : 'star_outline'}</span>
+        </button>
+        <button className="icon" onClick={() => onRemove(mail.id)}>
+          <span className="material-icons">delete</span>
+        </button>
       </div>
     </div>
   );
