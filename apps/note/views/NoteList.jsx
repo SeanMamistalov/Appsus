@@ -1,51 +1,45 @@
-const { useState } = React;
-const { useOutletContext } = ReactRouterDOM;
+const { useState } = React
+const { useOutletContext } = ReactRouterDOM
 
-import { ColorPicker } from "../cmps/ColorInput.jsx";
-import { NotePreview } from "../cmps/NotePreview.jsx";
-import { AddNoteForm } from "../cmps/AddNote.jsx";  // Import the AddNoteForm component
+import { NotePreview } from "../cmps/NotePreview.jsx"
+import { ColorPicker } from "../cmps/dynamic-note/ColorInput.jsx"
 
 export function NoteList() {
-    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor, onArchive, onUpdate } = useOutletContext();
-    const [showColorPicker, setShowColorPicker] = useState(null);
-    const [noteToEdit, setNoteToEdit] = useState(null);  // State to manage the note being edited
-
-    function handleEdit(note) {
-        setNoteToEdit(note);
-    }
-
-    function handleCloseEditForm() {
-        setNoteToEdit(null);
-    }
+    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor } = useOutletContext()
+    const [showColorPicker, setShowColorPicker] = useState(null)
 
     return (
         <section className="note-list">
             {notes.map(note => (
                 <div key={note.id} className="note-item" style={{ backgroundColor: note.backgroundColor || 'white' }}>
-                    <div className="pin-container">
-                        <button onClick={() => onTogglePin(note.id)} className="icon-button pin-button" title={note.isPinned ? "Unpin Note" : "Pin Note"}>
-                            <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
-                        </button>
-                    </div>
+                    <button onClick={() => onTogglePin(note.id)} className="icon-button pin-button">
+                        <img className="icon" src={note.isPinned ? "assets/img/unpin.svg" : "assets/img/pin.svg"} alt="Pin Icon" />
+                    </button>
                     <NotePreview note={note} onUpdateColor={onUpdateColor} />
                     <div className="buttons-container">
-                        <button onClick={() => onRemove(note.id)} className="icon-button" title="Delete Note">
+                        <button onClick={() => onRemove(note.id)} className="icon-button">
                             <img className="icon" src="assets/img/delete.svg" alt="Delete Icon" />
                         </button>
-                        <button onClick={() => onDuplicate(note.id)} className="icon-button" title="Duplicate Note">
-                            <img className="icon" src="assets/img/duplicate.svg" alt="Duplicate Icon" />
+                        <button onClick={() => onDuplicate(note.id)} className="icon-button">
+                            <img className="icon" src="assets/img/more.svg" alt="Duplicate Icon" />
                         </button>
-                        <button className="icon-button" title="Edit Note" onClick={() => handleEdit(note)}>
+                        <button className="icon-button">
+                            <img className="icon" src="assets/img/reminder.svg" alt="Reminder Icon" />
+                        </button>
+                        <button className="icon-button">
                             <img className="icon" src="assets/img/edit.svg" alt="Edit Icon" />
                         </button>
-                        <button className="icon-button" onClick={() => setShowColorPicker(note.id)} title="Change Note Color">
+                        <button className="icon-button" onClick={() => setShowColorPicker(note.id)}>
                             <img className="icon" src="assets/img/palette.svg" alt="Palette Icon" />
                         </button>
-                        <button className="icon-button" title="Add Image">
+                        <button className="icon-button">
                             <img className="icon" src="assets/img/add_img.svg" alt="Add Image Icon" />
                         </button>
-                        <button onClick={() => onArchive(note.id)} className="icon-button" title="Archive Note">
+                        <button className="icon-button">
                             <img className="icon" src="assets/img/archive.svg" alt="Archive Icon" />
+                        </button>
+                        <button className="icon-button">
+                            <img className="icon" src="assets/img/more.svg" alt="More Icon" />
                         </button>
                     </div>
                     {showColorPicker === note.id && (
@@ -58,13 +52,6 @@ export function NoteList() {
                     )}
                 </div>
             ))}
-            {noteToEdit && (
-                <AddNoteForm
-                    existingNote={noteToEdit}
-                    onClose={handleCloseEditForm}
-                    onSave={onUpdate}
-                />
-            )}
         </section>
-    );
+    )
 }
