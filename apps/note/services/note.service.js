@@ -15,7 +15,8 @@ export const noteService = {
     togglePin,
     deletePermanently,
     duplicate,
-    updateColor
+    updateColor,
+    archive
 }
 
 function query(filterBy = {}) {
@@ -26,17 +27,27 @@ function query(filterBy = {}) {
             } else {
                 notes = notes.filter(note => !note.isTrashed)
             }
+
+            if (filterBy.isArchived !== undefined) {
+                notes = notes.filter(note => note.isArchived === filterBy.isArchived)
+            } else {
+                notes = notes.filter(note => !note.isArchived)
+            }
+
             if (filterBy.title) {
                 const regExp = new RegExp(filterBy.title, 'i')
                 notes = notes.filter(note => regExp.test(note.info.title))
             }
+
             if (filterBy.type) {
                 notes = notes.filter(note => note.type === filterBy.type)
             }
+
             notes.sort((a, b) => a.isPinned - b.isPinned)
             return notes
         })
 }
+
 
 function get(noteId) {
     return storageService.get(NOTE_KEY, noteId)
@@ -64,16 +75,23 @@ function save(note) {
 }
 
 function getEmptyNote(type = '', title = '') {
+    const emptyInfo = {
+        title,
+        txt: '',
+        url: '',
+    }
+
+    if (type === 'recording') {
+        emptyInfo.url = ''
+    }
+
     return {
         type,
-        info: {
-            title,
-            txt: '',
-            url: '',
-        },
+        info: emptyInfo,
         backgroundColor: '#ffffff',
         isPinned: true,
         isTrashed: false,
+        isArchived: false,
     }
 }
 
@@ -110,6 +128,14 @@ function updateColor(noteId, color) {
     })
 }
 
+function archive(noteId) {
+    return get(noteId)
+        .then(note => {
+            note.isArchived = true
+            return save(note)
+        })
+}
+
 function _createNotes() {
     let notes = utilService.loadFromStorage(NOTE_KEY)
     if (!notes || !notes.length) {
@@ -121,12 +147,28 @@ function _createNotes() {
             type: 'img',
             isPinned: true,
             isTrashed: false,
+            isArchived: false,
             info: {
-                title: utilService.makeLorem(2),
-                url: 'assets/img/apple.jpeg'
+                title: 'NoteImg',
+                url: 'assets/img/apple.png'
             }
         }
         notes.push(imageNote)
+
+        const recordingNote = {
+            id: utilService.makeId(5),
+            createdAt: utilService.randomPastTime().toLocaleString(),
+            type: 'recording',
+            isPinned: true,
+            isTrashed: false,
+            isArchived: false,
+            backgroundColor: '#b4ffe0',
+            info: {
+                title: 'NoteAudio',
+                url: 'assets/audio/be-happy.mp3'
+            }
+        }
+        notes.push(recordingNote)
 
         for (let i = 0; i < 6; i++) {
             const note = {
@@ -135,14 +177,14 @@ function _createNotes() {
                 type: 'txt',
                 isPinned: true,
                 isTrashed: false,
+                isArchived: false,
                 info: {
                     title: utilService.makeLorem(2),
                     txt: utilService.makeLorem(utilService.getRandomIntInclusive(2, 10))
                 }
             }
-            notes.push(note);
+            notes.push(note)
         }
-        
-        utilService.saveToStorage(NOTE_KEY, notes);
+        utilService.saveToStorage(NOTE_KEY, notes)
     }
 }

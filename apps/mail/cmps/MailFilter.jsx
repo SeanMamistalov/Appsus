@@ -18,6 +18,8 @@ export function EmailFilter({ searchQuery, onSearchQueryChange, toggleSidebar })
           placeholder="Search mails..."
         />
       </div>
+      <img className="user-img" src="assets/img/sean-logo.jpg" alt="" />
     </header>
+
   );
 }

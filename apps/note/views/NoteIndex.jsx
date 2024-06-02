@@ -1,31 +1,31 @@
-const { useState, useEffect } = React;
-const { NavLink, Outlet, useSearchParams } = ReactRouterDOM;
+const { useState, useEffect } = React
+const { NavLink, Outlet, useSearchParams } = ReactRouterDOM
 
-import { noteService } from '../services/note.service.js';
-import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js';
-import { SearchNote } from '../cmps/SearchNote.jsx';
-import { AddNoteForm } from '../cmps/AddNote.jsx';
+import { noteService } from '../services/note.service.js'
+import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
+import { SearchNote } from '../cmps/SearchNote.jsx'
+import { AddNoteForm } from '../cmps/AddNote.jsx'
 
 export function NoteIndex() {
-    const [notes, setNotes] = useState([]);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchParams));
-    const [showAddNoteForm, setShowAddNoteForm] = useState(false);
+    const [notes, setNotes] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [filterBy, setFilterBy] = useState(noteService.getFilterFromSearchParams(searchParams))
+    const [showAddNoteForm, setShowAddNoteForm] = useState(false)
 
     useEffect(() => {
-        setSearchParams(filterBy);
+        setSearchParams(filterBy)
         noteService.query(filterBy)
             .then(notes => setNotes(notes))
-            .catch(err => showErrorMsg('Failed to fetch notes'));
-    }, [filterBy, setSearchParams]);
+            .catch(err => showErrorMsg('Failed to fetch notes'))
+    }, [filterBy, setSearchParams])
 
     function removeNote(noteId) {
         noteService.remove(noteId)
             .then(() => {
-                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId));
-                showSuccessMsg(`Note ${noteId} moved to trash successfully!`);
+                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId))
+                showSuccessMsg(`Note ${noteId} moved to trash successfully!`)
             })
-            .catch(err => showErrorMsg('Failed to move note to trash'));
+            .catch(err => showErrorMsg('Failed to move note to trash'))
     }
 
     function togglePinNote(noteId) {
@@ -33,53 +33,75 @@ export function NoteIndex() {
             .then(() => {
                 setNotes(prevNotes => {
                     const updatedNotes = prevNotes.map(note => {
-                        if (note.id === noteId) note.isPinned = !note.isPinned;
-                        return note;
-                    });
-                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned);
-                    return updatedNotes;
-                });
-                showSuccessMsg(`Note ${noteId} pin status updated successfully!`);
+                        if (note.id === noteId) note.isPinned = !note.isPinned
+                        return note
+                    })
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
+                    return updatedNotes
+                })
+                showSuccessMsg(`Note ${noteId} pin status updated successfully!`)
             })
-            .catch(err => showErrorMsg('Failed to update pin status'));
+            .catch(err => showErrorMsg('Failed to update pin status'))
     }
 
     function duplicateNote(noteId) {
         noteService.duplicate(noteId)
             .then(duplicatedNote => {
                 setNotes(prevNotes => {
-                    const updatedNotes = [...prevNotes, duplicatedNote];
-                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned);
-                    return updatedNotes;
-                });
-                showSuccessMsg(`Note ${noteId} duplicated successfully!`);
+                    const updatedNotes = [...prevNotes, duplicatedNote]
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
+                    return updatedNotes
+                })
+                showSuccessMsg(`Note ${noteId} duplicated successfully!`)
             })
-            .catch(err => showErrorMsg('Failed to duplicate note'));
+            .catch(err => showErrorMsg('Failed to duplicate note'))
     }
 
     function updateNoteColor(noteId, color) {
         noteService.updateColor(noteId, color)
             .then(updatedNote => {
                 setNotes(prevNotes => {
-                    return prevNotes.map(note => note.id === noteId ? updatedNote : note);
-                });
-                showSuccessMsg(`Note ${noteId} color updated successfully!`);
+                    return prevNotes.map(note => note.id === noteId ? updatedNote : note)
+                })
+                showSuccessMsg(`Note ${noteId} color updated successfully!`)
             })
-            .catch(err => showErrorMsg('Failed to update note color'));
+            .catch(err => showErrorMsg('Failed to update note color'))
+    }
+
+    function archiveNote(noteId) {
+        noteService.archive(noteId)
+            .then(() => {
+                setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId));
+                showSuccessMsg(`Note ${noteId} moved to archive successfully!`);
+            })
+            .catch(err => showErrorMsg('Failed to move note to archive'));
+    }    
+    
+    function updateNote(note) {
+        return noteService.update(note)
+            .then(updatedNote => {
+                const updatedNotes = notes.map(n => n.id === note.id ? updatedNote : n);
+                setNotes(updatedNotes);
+                showSuccessMsg('Note updated');
+            })
+            .catch(err => {
+                showErrorMsg('Failed to update note');
+                throw err;
+            });
     }
 
     function addNote(newNote) {
         return noteService.save(newNote)
             .then(savedNote => {
                 setNotes(prevNotes => {
-                    const updatedNotes = [...prevNotes, savedNote];
-                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned);
-                    return updatedNotes;
-                });
-                showSuccessMsg('Note added successfully!');
-                setShowAddNoteForm(false);
+                    const updatedNotes = [...prevNotes, savedNote]
+                    updatedNotes.sort((a, b) => a.isPinned - b.isPinned)
+                    return updatedNotes
+                })
+                showSuccessMsg('Note added successfully!')
+                setShowAddNoteForm(false)
             })
-            .catch(err => showErrorMsg('Failed to add note'));
+            .catch(err => showErrorMsg('Failed to add note'))
     }
 
     return (
@@ -124,10 +146,10 @@ export function NoteIndex() {
                         )}
                     </div>
                     <div className="note-list-container">
-                        <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote, onUpdateColor: updateNoteColor }} />
+                    <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote, onUpdateColor: updateNoteColor, onArchive: archiveNote, onUpdate: updateNote }} />
                     </div>
                 </div>
             </div>
         </section>
-    );
+    )
 }

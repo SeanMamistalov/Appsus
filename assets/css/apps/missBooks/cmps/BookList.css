@@ -27,3 +27,8 @@
 .book-list button:hover {
     background-color: #f0f0f0;
 }
+
+.book-list ul {
+  list-style-type: none;
+  padding: 0;
+}
