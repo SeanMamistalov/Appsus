@@ -61,27 +61,25 @@ export function MailIndex() {
         showErrorMsg("Failed to remove mail");
       });
   }
-
   function markAsRead(mailId) {
     emailService
       .markAsRead(mailId)
       .then(() => {
         setMails((prevMails) => {
-          return prevMails.map((mail) => {
-            if (mail.id === mailId) {
-              return { ...mail, isRead: true };
+          const updatedMails = prevMails.map((mail) => {
+            if (mail.id === mailId && !mail.isRead) {
+              const updatedMail = { ...mail, isRead: true };
+              setReadCount((prevCount) => prevCount + 1);
+              return updatedMail;
             }
             return mail;
           });
+          return updatedMails;
         });
-      })
-      .then(() => {
-        const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
-        console.log("Unread mails count:", unreadMailsCount);
       })
       .catch((err) => showErrorMsg("Failed to mark mail as read"));
   }
-
+  
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };

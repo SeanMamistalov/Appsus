@@ -1,13 +1,13 @@
  .email-row {
   display: grid;
-  grid-template-columns: auto minmax(150px, 1fr) minmax(150px, 2fr) auto;
+  grid-template-columns: auto minmax(250px, 1fr) minmax(150px, 2fr) auto;
   gap: 10px;
   align-items: center;
   padding: 10px 0;
   padding-left: 10px;
   border-bottom: 1px solid #BABEC1;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 14px;
 }
 
 .email-row:hover {
@@ -17,11 +17,19 @@
 .email-side-icons-container {
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .checkbox-input {
-  margin-right: 5px;
+  margin-right: 3px;
+}
+.email-from-content {
+  display: flex;
+  align-items: center;
+}
+
+.email-from-content .email-side-icons-container {
+  margin-left: auto; 
 }
 
 .fa-solid.fa-star.starred {
@@ -30,6 +38,7 @@
 
 .email-from-txt {
   font-weight: bold;
+  font-size: 0.9rem
 }
 
 .email-body {
@@ -39,7 +48,7 @@
 }
 
 .makaf {
-  margin: 0 5px;
+  margin: 0 3px;
 }
 
 .email-body-txt {
@@ -47,7 +56,7 @@
 }
 
 .email-row-date {
-  margin-right: 20px;
+  margin-right: 10px;
   justify-self: end;
   transition: opacity 0.2s ease-in-out;
 }
@@ -55,7 +64,7 @@
 .email-icons-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px; 
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
 }
@@ -70,5 +79,4 @@
 
 .email-row-icon {
   cursor: pointer;
-  font-size: 1.2rem;
-}
+  font-size: 1.1rem;}
