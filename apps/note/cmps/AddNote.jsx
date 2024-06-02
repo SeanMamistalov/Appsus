@@ -1,15 +1,19 @@
-const { useState } = React
+const { useState, useEffect } = React
 const { useNavigate } = ReactRouterDOM
 
 import { noteService } from '../services/note.service.js'
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
-export function AddNoteForm({ onClose, onSave }) {
+export function AddNoteForm({ onClose, onSave, onUpdate, existingNote }) {
     const [note, setNote] = useState(noteService.getEmptyNote())
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if (existingNote) setNote(existingNote)
+    }, [existingNote])
+
     function handleChange({ target }) {
-        const { name: prop, value } = target;
+        const { name: prop, value } = target
         setNote(prevNote => {
             if (prop === 'title' || prop === 'txt') {
                 return {
@@ -26,9 +30,9 @@ export function AddNoteForm({ onClose, onSave }) {
     }
 
     function handleFileChange({ target }) {
-        const file = target.files[0];
+        const file = target.files[0]
         if (file) {
-            const reader = new FileReader();
+            const reader = new FileReader()
             reader.onloadend = () => {
                 setNote(prevNote => ({
                     ...prevNote,
@@ -44,14 +48,25 @@ export function AddNoteForm({ onClose, onSave }) {
 
     function handleSave(ev) {
         ev.preventDefault()
-        onSave(note)
-            .then(() => {
-                showSuccessMsg('Note added successfully!')
-                onClose()
-            })
-            .catch(() => {
-                showErrorMsg('Failed to add note')
-            })
+        if (note.id) {
+            onUpdate(note)
+                .then(() => {
+                    showSuccessMsg('Note updated successfully!')
+                    onClose()
+                })
+                .catch(() => {
+                    showErrorMsg('Failed to update note')
+                })
+        } else {
+            onSave(note)
+                .then(() => {
+                    showSuccessMsg('Note added successfully!')
+                    onClose()
+                })
+                .catch(() => {
+                    showErrorMsg('Failed to add note')
+                })
+        }
     }
 
     return (
@@ -60,7 +75,7 @@ export function AddNoteForm({ onClose, onSave }) {
                 <label htmlFor="title">Title</label>
                 <input
                     onChange={handleChange}
-                    value={note.title}
+                    value={note.info.title}
                     id="title"
                     name="title"
                     type="text"
@@ -82,7 +97,7 @@ export function AddNoteForm({ onClose, onSave }) {
                         <label htmlFor="txt">Text</label>
                         <textarea
                             onChange={handleChange}
-                            value={note.txt}
+                            value={note.info.txt}
                             id="txt"
                             name="txt"
                             placeholder="Enter your note here"></textarea>

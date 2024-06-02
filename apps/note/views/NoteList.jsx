@@ -1,12 +1,22 @@
-const { useState } = React
-const { useOutletContext } = ReactRouterDOM
+const { useState } = React;
+const { useOutletContext } = ReactRouterDOM;
 
-import { ColorPicker } from "../cmps/ColorInput.jsx"
-import { NotePreview } from "../cmps/NotePreview.jsx"
+import { ColorPicker } from "../cmps/ColorInput.jsx";
+import { NotePreview } from "../cmps/NotePreview.jsx";
+import { AddNoteForm } from "../cmps/AddNote.jsx";  // Import the AddNoteForm component
 
 export function NoteList() {
-    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor, onArchive } = useOutletContext();
-    const [showColorPicker, setShowColorPicker] = useState(null)
+    const { notes, onRemove, onTogglePin, onDuplicate, onUpdateColor, onArchive, onUpdate } = useOutletContext();
+    const [showColorPicker, setShowColorPicker] = useState(null);
+    const [noteToEdit, setNoteToEdit] = useState(null);  // State to manage the note being edited
+
+    function handleEdit(note) {
+        setNoteToEdit(note);
+    }
+
+    function handleCloseEditForm() {
+        setNoteToEdit(null);
+    }
 
     return (
         <section className="note-list">
@@ -25,7 +35,7 @@ export function NoteList() {
                         <button onClick={() => onDuplicate(note.id)} className="icon-button" title="Duplicate Note">
                             <img className="icon" src="assets/img/duplicate.svg" alt="Duplicate Icon" />
                         </button>
-                        <button className="icon-button" title="Edit Note">
+                        <button className="icon-button" title="Edit Note" onClick={() => handleEdit(note)}>
                             <img className="icon" src="assets/img/edit.svg" alt="Edit Icon" />
                         </button>
                         <button className="icon-button" onClick={() => setShowColorPicker(note.id)} title="Change Note Color">
@@ -48,6 +58,13 @@ export function NoteList() {
                     )}
                 </div>
             ))}
+            {noteToEdit && (
+                <AddNoteForm
+                    existingNote={noteToEdit}
+                    onClose={handleCloseEditForm}
+                    onSave={onUpdate}
+                />
+            )}
         </section>
-    )
+    );
 }

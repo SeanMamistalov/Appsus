@@ -76,6 +76,19 @@ export function NoteIndex() {
             })
             .catch(err => showErrorMsg('Failed to move note to archive'));
     }    
+    
+    function updateNote(note) {
+        return noteService.update(note)
+            .then(updatedNote => {
+                const updatedNotes = notes.map(n => n.id === note.id ? updatedNote : n);
+                setNotes(updatedNotes);
+                showSuccessMsg('Note updated');
+            })
+            .catch(err => {
+                showErrorMsg('Failed to update note');
+                throw err;
+            });
+    }
 
     function addNote(newNote) {
         return noteService.save(newNote)
@@ -133,7 +146,7 @@ export function NoteIndex() {
                         )}
                     </div>
                     <div className="note-list-container">
-                    <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote, onUpdateColor: updateNoteColor, onArchive: archiveNote }} />
+                    <Outlet context={{ notes, onRemove: removeNote, onTogglePin: togglePinNote, onDuplicate: duplicateNote, onUpdateColor: updateNoteColor, onArchive: archiveNote, onUpdate: updateNote }} />
                     </div>
                 </div>
             </div>
