@@ -12,7 +12,7 @@ export function About() {
   
             <div className="teammate-sean">
               <h4>Sean Mamistalov</h4>
-              <p>Email: seanmamistalov@gmail.com</p>
+              <p>Email: mamistalovsean@gmail.com</p>
               <p>Github: <a href="https://github.com/SeanMamistalov">SeanMamistalov</a></p>
             </div>
             <div className="teammate-daniel">
