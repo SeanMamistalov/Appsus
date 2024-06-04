@@ -61,23 +61,24 @@ export function MailIndex() {
         showErrorMsg("Failed to remove mail");
       });
   }
-
+  
   function markAsRead(mailId) {
     emailService
       .markAsRead(mailId)
       .then(() => {
         setMails((prevMails) => {
-          return prevMails.map((mail) => {
+          const updatedMails = prevMails.map((mail) => {
             if (mail.id === mailId) {
               return { ...mail, isRead: true };
             }
             return mail;
           });
+  
+          const unreadMailsCount = updatedMails.filter((mail) => !mail.isRead).length;
+          console.log("Unread mails count:", unreadMailsCount);
+  
+          return updatedMails;
         });
-      })
-      .then(() => {
-        const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
-        console.log("Unread mails count:", unreadMailsCount);
       })
       .catch((err) => showErrorMsg("Failed to mark mail as read"));
   }
@@ -123,7 +124,7 @@ export function MailIndex() {
       <div className="mail-content">
         <nav className="sidebar-gmail">
           <button className="compose-btn" onClick={handleComposeClick}>
-            <span className="material-icons">create</span> Compose
+            <span className="material-symbols-outlined icon">create</span> Compose
           </button>
           <NavLink
             className={({ isActive }) =>
@@ -131,7 +132,8 @@ export function MailIndex() {
             }
             to="/mail/inbox"
           >
-            <span className="material-icons">inbox</span> Inbox{" "}
+            <span className="material-symbols-outlined icon">inbox</span> Inbox {" "}
+
             {unreadMailsCount > 0 && `(${unreadMailsCount})`}
           </NavLink>
           <NavLink
@@ -140,7 +142,8 @@ export function MailIndex() {
             }
             to="/mail/starred"
           >
-            <span className="material-icons">star</span> Starred
+            <span className="material-symbols-outlined icon">star</span> Starred
+
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -148,7 +151,8 @@ export function MailIndex() {
             }
             to="/mail/sentEmails"
           >
-            <span className="material-icons">send</span> Sent
+            <span className="material-symbols-outlined icon">send</span> Sent
+
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -156,7 +160,8 @@ export function MailIndex() {
             }
             to="/mail/trash"
           >
-            <span className="material-icons">delete</span> Trash
+            <span className="material-symbols-outlined icon">delete</span> Trash
+
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -164,7 +169,7 @@ export function MailIndex() {
             }
             to="/mail/drafts"
           >
-            <span className="material-icons">drafts</span> Drafts
+            <span className="material-symbols-outlined icon">drafts</span> Drafts
           </NavLink>
         </nav>
         <div className="mails-container">
