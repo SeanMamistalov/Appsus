@@ -1,5 +1,4 @@
-const { useState } = React
-import { emailService } from "../services/mail.service.js"
+const { useState } = React;
 
 export function EmailCompose({ onEmailSent, onCloseCompose }) {
   const [to, setTo] = useState('');
@@ -31,11 +30,16 @@ export function EmailCompose({ onEmailSent, onCloseCompose }) {
     if (name === 'body') setBody(value);
   };
 
+  const handleClose = (event) => {
+    event.stopPropagation();
+    onCloseCompose();
+  };
+
   return (
     <section className="compose-modal-container">
       <div className="compose-header">
         <p>New Message</p>
-        <span><i onClick={() => onCloseCompose()} className="fa-solid fa-x"></i></span>
+        <span><i onClick={handleClose} className="fa-solid fa-x"></i></span>
       </div>
       <form onSubmit={handleSubmit}>
         <input
@@ -68,7 +72,7 @@ export function EmailCompose({ onEmailSent, onCloseCompose }) {
         />
         <div className="form-lower-buttons">
           <button type="submit">Send</button>
-          <i onClick={() => onCloseCompose()} className="fa-regular fa-trash-can delete-compose-icon"></i>
+          <i onClick={handleClose} className="fa-regular fa-trash-can delete-compose-icon"></i>
         </div>
       </form>
     </section>

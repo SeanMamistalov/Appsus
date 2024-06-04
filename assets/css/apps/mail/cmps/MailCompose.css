@@ -56,7 +56,7 @@
   width: 600px;
   height: 630px;
   font-family: 'Roboto', sans-serif;
-
+  z-index: 1000;
 }
 
 .compose-header {

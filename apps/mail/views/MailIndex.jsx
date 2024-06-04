@@ -61,25 +61,27 @@ export function MailIndex() {
         showErrorMsg("Failed to remove mail");
       });
   }
+
   function markAsRead(mailId) {
     emailService
       .markAsRead(mailId)
       .then(() => {
         setMails((prevMails) => {
-          const updatedMails = prevMails.map((mail) => {
-            if (mail.id === mailId && !mail.isRead) {
-              const updatedMail = { ...mail, isRead: true };
-              setReadCount((prevCount) => prevCount + 1);
-              return updatedMail;
+          return prevMails.map((mail) => {
+            if (mail.id === mailId) {
+              return { ...mail, isRead: true };
             }
             return mail;
           });
-          return updatedMails;
         });
+      })
+      .then(() => {
+        const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
+        console.log("Unread mails count:", unreadMailsCount);
       })
       .catch((err) => showErrorMsg("Failed to mark mail as read"));
   }
-  
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -95,6 +97,10 @@ export function MailIndex() {
     setTimeout(() => setShowSuccessMessage(false), 3000);
   };
 
+  const handleCloseCompose = () => {
+    setIsComposeOpen(false);
+  };
+
   const handleUndo = () => {
     console.log("Undo action performed");
     setShowSuccessMessage(false);
@@ -105,82 +111,86 @@ export function MailIndex() {
   };
 
   const unreadMailsCount = mails.filter((mail) => !mail.isRead).length;
- return (
+  return (
     <section className={`mail-index ${isSidebarOpen ? "sidebar-open" : ""}`}>
-      <header className="mail-header">  
-      <EmailFilter
+      <header className="mail-header">
+        <EmailFilter
           searchQuery={searchQuery}
           onSearchQueryChange={handleSearchQueryChange}
           toggleSidebar={toggleSidebar}
-        /></header>
+        />
+      </header>
       <div className="mail-content">
-
-      <nav className="sidebar-gmail">
-        <button className="compose-btn" onClick={handleComposeClick}>
-          <span className="material-icons">create</span> Compose
-        </button>
-        <NavLink
-          className={({ isActive }) =>
-            `sidebar-item inbox${isActive ? " active" : ""}`
-          }
-          to="/mail/inbox"
-        >
-          <span className="material-icons">inbox</span> Inbox{" "}
-          {unreadMailsCount > 0 && `(${unreadMailsCount})`}
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            "sidebar-item starred" + (isActive ? " active" : "")
-          }
-          to="/mail/starred"
-        >
-          <span className="material-icons">star</span> Starred
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            "sidebar-item sent" + (isActive ? " active" : "")
-          }
-          to="/mail/sentEmails"
-        >
-          <span className="material-icons">send</span> Sent
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            "sidebar-item trash" + (isActive ? " active" : "")
-          }
-          to="/mail/trash"
-        >
-          <span className="material-icons">delete</span> Trash
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            "sidebar-item drafts" + (isActive ? " active" : "")
-          }
-          to="/mail/drafts"
-        >
-          <span className="material-icons">drafts</span> Drafts
-        </NavLink>
-      </nav>
-      <div className="mails-container">
-      {isComposeOpen && <EmailCompose onEmailSent={handleEmailSent} />}
-      {showSuccessMessage && (
-        <div className="success-message">
-          Message sent
-          <button className="undo-btn" onClick={handleUndo}>
-            Undo
+        <nav className="sidebar-gmail">
+          <button className="compose-btn" onClick={handleComposeClick}>
+            <span className="material-icons">create</span> Compose
           </button>
-          <button className="view-btn" onClick={handleViewMessage}>
-            View Message
-          </button>
+          <NavLink
+            className={({ isActive }) =>
+              `sidebar-item inbox${isActive ? " active" : ""}`
+            }
+            to="/mail/inbox"
+          >
+            <span className="material-icons">inbox</span> Inbox{" "}
+            {unreadMailsCount > 0 && `(${unreadMailsCount})`}
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              "sidebar-item starred" + (isActive ? " active" : "")
+            }
+            to="/mail/starred"
+          >
+            <span className="material-icons">star</span> Starred
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              "sidebar-item sent" + (isActive ? " active" : "")
+            }
+            to="/mail/sentEmails"
+          >
+            <span className="material-icons">send</span> Sent
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              "sidebar-item trash" + (isActive ? " active" : "")
+            }
+            to="/mail/trash"
+          >
+            <span className="material-icons">delete</span> Trash
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              "sidebar-item drafts" + (isActive ? " active" : "")
+            }
+            to="/mail/drafts"
+          >
+            <span className="material-icons">drafts</span> Drafts
+          </NavLink>
+        </nav>
+        <div className="mails-container">
+          {isComposeOpen && (
+            <EmailCompose
+              onEmailSent={handleEmailSent}
+              onCloseCompose={handleCloseCompose}
+            />
+          )}
+          {showSuccessMessage && (
+            <div className="success-message">
+              Message sent
+              <button className="undo-btn" onClick={handleUndo}>
+                Undo
+              </button>
+              <button className="view-btn" onClick={handleViewMessage}>
+                View Message
+              </button>
+            </div>
+          )}
+          <MailList
+            mails={filteredMails}
+            onRemove={removeMail}
+            onMarkAsRead={markAsRead}
+          />
         </div>
-      )}
-      
-      <MailList
-        mails={filteredMails}
-        onRemove={removeMail}
-        onMarkAsRead={markAsRead}
-      />
-      </div>
       </div>
     </section>
   );
