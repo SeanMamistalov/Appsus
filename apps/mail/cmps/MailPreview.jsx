@@ -1,5 +1,5 @@
-const { useState } = React;
-const { Link } = ReactRouterDOM;
+const { useState } = React
+const { Link } = ReactRouterDOM
 
 export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   if (!mail) return null;
@@ -7,7 +7,7 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   const [isRead, setIsRead] = useState(mail.isRead);
   const [isStarred, setIsStarred] = useState(mail.starred);
 
-  const handleClick = () => {
+  const handlePreviewClick = () => {
     if (!isRead) {
       setIsRead(true);
       onMarkAsRead(mail.id);
@@ -23,7 +23,12 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   const formattedDate = mail.sentAt ? new Date(mail.sentAt).toLocaleDateString() : '';
 
   return (
-    <div className={`email-row ${isRead ? 'read' : 'unread'}`}>
+    <Link
+      to={`/mail/${mail.id}`}
+      className={`email-row ${isRead ? 'read' : 'unread'}`}
+      style={{ textDecoration: 'none' }}
+      onClick={handlePreviewClick}
+    >
       <div className="email-from-content">
         <div className="email-side-icons-container">
           <input onClick={(e) => e.stopPropagation()} className='checkbox-input' type="checkbox" />
@@ -33,21 +38,16 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
         </div>
         <span className={`email-from-txt ${isRead ? 'read' : 'unread'}`}>{mail.from}</span>
       </div>
-      <Link
-        to={`/mail/${mail.id}`}
-        className="email-body"
-        style={{ textDecoration: 'none', flex: 2, display: 'flex', alignItems: 'center' }}
-        onClick={handleClick}
-      >
+      <div className="email-body" style={{ flex: 2 }}>
         <span className={isRead ? 'read' : 'unread'}>
           {mail.subject}
           <span className="makaf">-</span>
         </span>
         <span className="email-body-txt">{mail.text ? mail.text.substring(0, 100) : ''}</span>
-      </Link>
+      </div>
       <span className={`email-row-date ${isRead ? 'read' : 'unread'}`}>{formattedDate}</span>
       <div className={`email-icons-container ${isRead ? 'read' : 'unread'}`}>
-        <span onClick={(e) => { e.stopPropagation(); handleClick(); }}>
+        <span onClick={(e) => { e.stopPropagation(); handlePreviewClick(); }}>
           {isRead ? 
             <i title="Mark as unread" className="fa-regular fa-envelope email-row-icon"></i> : 
             <i title="Mark as read" className="fa-regular fa-envelope-open email-row-icon"></i>
@@ -55,6 +55,6 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
         </span>
         <i onClick={(e) => { e.stopPropagation(); onRemove(mail.id); }} title="Delete email" className="fa-regular fa-trash-can email-row-icon"></i>
       </div>
-    </div>
+    </Link>
   );
 }

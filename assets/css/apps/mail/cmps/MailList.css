@@ -30,7 +30,7 @@
 .mail-list .mail-item.read {
     background-color: rgb(42, 42, 65); 
 }
-
+  
 .mail-list .mail-item:hover {
     background-color: var(--mail-item-hover-bg-color);
     transform: scale(1.01);
