@@ -32,13 +32,15 @@ export function MailIndex() {
   const [starredMails, setStarredMails] = useState([]);
 
   useEffect(() => {
-    setSearchParams(filterBy);
     emailService
       .query(filterBy)
-      .then((mails) => setMails(mails))
-      .catch((err) => showErrorMsg("Failed to fetch notes"));
-  }, [filterBy, setSearchParams]);
-
+      .then((mails) => {
+        setMails(mails); // Set all mails
+        const starred = mails.filter(mail => mail.isStarred); // Filter starred mails
+        setStarredMails(starred); // Update starred mails state
+      })
+      .catch((err) => showErrorMsg("Failed to fetch mails"));
+  }, [filterBy]);
   function onSetFilterBy(newFilter) {
     setFilterBy(newFilter);
   }
@@ -93,10 +95,10 @@ export function MailIndex() {
     });
 
     setMails(updatedMails);
+
     const updatedStarredMails = updatedMails.filter((mail) => mail.isStarred);
     setStarredMails(updatedStarredMails);
   };
-  
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
