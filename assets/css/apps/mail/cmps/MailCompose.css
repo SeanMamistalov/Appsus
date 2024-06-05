@@ -140,3 +140,11 @@
 .form-lower-buttons button:hover {
   background-color: #1465e9;
 }
+
+  /* For mobile */
+  @media only screen and (max-width: 600px) {
+    .compose-modal-container, .compose-header, .compose-btn, .compose-modal-container form, .form-lower-buttons button {
+      max-width: 95%; 
+      padding: 0 10px; 
+    }
+  }

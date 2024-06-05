@@ -90,3 +90,11 @@
 a {
   color: black; 
 }
+
+  /* For mobile */
+  @media only screen and (max-width: 600px) {
+    .email-row, .email-icons-container {
+      max-width: 95%; 
+      padding: 0 10px; 
+    }
+  }

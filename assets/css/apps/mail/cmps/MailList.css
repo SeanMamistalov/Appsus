@@ -46,3 +46,11 @@
     transition: color 0.2s ease;
     outline: none;  
 }
+  
+  /* For mobile */
+  @media only screen and (max-width: 600px) {
+    .mail-list {
+      max-width: 95%; 
+      padding: 0 10px; 
+    }
+  }
