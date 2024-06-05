@@ -19,6 +19,7 @@ export const emailService = {
   getById,
   getEmails,
   sendEmail,
+  deletePermanently,
 };
 
 function getEmails() {
@@ -63,6 +64,9 @@ function query(filterBy) {
           //     (mail) => mail.from === gLoggedinUser.email && !mail.removedAt
           //   );
           //   break;
+        case "trash":
+          mails = mails.filter((mail) => mail.isTrashed === filterBy.isTrashed)
+          break;
           case "starred":
             mails = mails.filter((mail) => mail.isStarred);
             break;
@@ -95,7 +99,10 @@ function getFilterFromSearchParams(searchParams) {
 }
 
 function remove(mailId) {
-  return storageService.remove(MAIL_KEY, mailId);
+  return storageService.get(MAIL_KEY, mailId).then(mail => {
+    mail.isTrashed = true;
+    return storageService.put(MAIL_KEY, mail);
+  });
 }
 
 function save(mail) {
@@ -105,6 +112,11 @@ function save(mail) {
     return storageService.post(MAIL_KEY, mail);
   }
 }
+
+function deletePermanently(mailId) {
+  return storageService.remove(MAIL_KEY, mailId);
+}
+
 
 function getEmptyMail(subject = "", body = "", to = "") {
   return {

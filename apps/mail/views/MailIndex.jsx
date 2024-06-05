@@ -97,6 +97,7 @@ export function MailIndex() {
     });
 
     setMails(updatedMails);
+    emailService.save;
     const updatedStarredMails = updatedMails.filter((mail) => mail.isStarred);
     setStarredMails(updatedStarredMails);
   };
@@ -180,6 +181,8 @@ export function MailIndex() {
               "sidebar-item trash" + (isActive ? " active" : "")
             }
             to="/mail/trash"
+            onClick={()=> {setFilterBy({status:'trash'})}}
+
           >
             <span className="material-symbols-outlined icon">delete</span> Trash
 

@@ -1,6 +1,5 @@
 const { useState } = React;
 const { Link } = ReactRouterDOM;
-
 export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   if (!mail) return null;
 
@@ -16,21 +15,19 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
 
   const handleToggleStarred = (e) => {
     e.stopPropagation();
-    setIsStarred(!isStarred);
+    setIsStarred((prev) => !prev);
     onToggleStarred(mail.id);
   };
 
   const formattedDate = mail.sentAt ? new Date(mail.sentAt).toLocaleDateString() : '';
 
   return (
-    <div className={`email-row ${isRead ? 'read' : 'unread'}`}>
+    <div className={`email-row ${isRead ? 'read' : 'unread'}`} onClick={handleClick}>
       <div className="email-from-content">
         <div className="email-side-icons-container">
           <input onClick={(e) => e.stopPropagation()} className='checkbox-input' type="checkbox" />
           <span onClick={handleToggleStarred}>
-            <i 
-              className={`fa-star ${isStarred ? 'fa-solid starred' : 'fa-regular'}`} 
-            ></i>
+            <i className={`fa-star ${isStarred ? 'fa-solid starred' : 'fa-regular'}`}></i>
           </span>
         </div>
         <span className={`email-from-txt ${isRead ? 'read' : 'unread'}`}>{mail.from}</span>
@@ -39,7 +36,6 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
         to={`/mail/${mail.id}`}
         className="email-body"
         style={{ textDecoration: 'none', flex: 2, display: 'flex', alignItems: 'center' }}
-        onClick={handleClick}
       >
         <span className={isRead ? 'read' : 'unread'}>
           {mail.subject}
@@ -49,13 +45,17 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
       </Link>
       <span className={`email-row-date ${isRead ? 'read' : 'unread'}`}>{formattedDate}</span>
       <div className={`email-icons-container ${isRead ? 'read' : 'unread'}`}>
-        <span onClick={(e) => { e.stopPropagation(); handleClick(); }}>
+        <span>
           {isRead ? 
             <i title="Mark as unread" className="fa-regular fa-envelope email-row-icon"></i> : 
             <i title="Mark as read" className="fa-regular fa-envelope-open email-row-icon"></i>
           }
         </span>
-        <i onClick={(e) => { e.stopPropagation(); onRemove(mail.id); }} title="Delete email" className="fa-regular fa-trash-can email-row-icon"></i>
+        <i 
+          onClick={(e) => { e.stopPropagation(); onRemove(mail.id); }} 
+          title="Delete email" 
+          className="fa-regular fa-trash-can email-row-icon">
+        </i>
       </div>
     </div>
   );
