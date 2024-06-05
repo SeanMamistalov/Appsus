@@ -57,3 +57,11 @@
     text-decoration: underline;
   }
   
+  
+  /* For mobile */
+  @media only screen and (max-width: 600px) {
+    .about-view, .about-view h1  {
+      max-width: 95%; 
+      padding: 0 10px; 
+    }
+  }
