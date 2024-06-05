@@ -1,6 +1,6 @@
 import { MailPreview } from "../cmps/MailPreview.jsx";
 
-export function MailList({ mails, onRemove, onMarkAsRead }) {
+export function MailList({ mails, onRemove, onMarkAsRead, onToggleStarred }) {
   if (!mails) {
     return <div>Loading...</div>;
   }
@@ -14,8 +14,14 @@ export function MailList({ mails, onRemove, onMarkAsRead }) {
       <ul>
         {mails.map((mail) => (
           <li key={mail.id}>
-            <MailPreview mail={mail} onMarkAsRead={onMarkAsRead} onRemove={onRemove} />
-          </li>
+<MailPreview
+          key={mail.id}
+          mail={mail}
+          onRemove={onRemove}
+          onMarkAsRead={onMarkAsRead}
+          onToggleStarred={onToggleStarred}
+        />
+                  </li>
         ))}
       </ul>
     </section>

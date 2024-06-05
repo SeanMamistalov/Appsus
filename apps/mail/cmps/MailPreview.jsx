@@ -5,7 +5,7 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
   if (!mail) return null;
 
   const [isRead, setIsRead] = useState(mail.isRead);
-  const [isStarred, setIsStarred] = useState(mail.starred);
+  const [isStarred, setIsStarred] = useState(mail.isStarred);
 
   const handleClick = () => {
     if (!isRead) {
@@ -28,7 +28,9 @@ export function MailPreview({ mail, onMarkAsRead, onRemove, onToggleStarred }) {
         <div className="email-side-icons-container">
           <input onClick={(e) => e.stopPropagation()} className='checkbox-input' type="checkbox" />
           <span onClick={handleToggleStarred}>
-            <i className={`fa-solid fa-star ${isStarred ? 'starred' : 'unstarred'}`}></i>
+            <i 
+              className={`fa-star ${isStarred ? 'fa-solid starred' : 'fa-regular'}`} 
+            ></i>
           </span>
         </div>
         <span className={`email-from-txt ${isRead ? 'read' : 'unread'}`}>{mail.from}</span>
