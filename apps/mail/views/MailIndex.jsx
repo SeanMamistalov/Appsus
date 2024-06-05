@@ -8,6 +8,7 @@ import {
 import { MailList } from "../cmps/MailList.jsx";
 import { EmailCompose } from "../views/MailCompose.jsx";
 import { EmailFilter } from "../cmps/MailFilter.jsx";
+import { MailStarred } from "../views/MailStarred.jsx";
 
 function getFilterFromSearchParams(searchParams) {
   const filter = {};
@@ -28,6 +29,7 @@ export function MailIndex() {
   const [isComposeOpen, setIsComposeOpen] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [starredMails, setStarredMails] = useState([]);
 
   useEffect(() => {
     setSearchParams(filterBy);
@@ -82,7 +84,19 @@ export function MailIndex() {
       })
       .catch((err) => showErrorMsg("Failed to mark mail as read"));
   }
+  const handleToggleStarred = (mailId) => {
+    const updatedMails = mails.map((mail) => {
+      if (mail.id === mailId) {
+        return { ...mail, isStarred: !mail.isStarred };
+      }
+      return mail;
+    });
 
+    setMails(updatedMails);
+    const updatedStarredMails = updatedMails.filter((mail) => mail.isStarred);
+    setStarredMails(updatedStarredMails);
+  };
+  
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -190,11 +204,20 @@ export function MailIndex() {
               </button>
             </div>
           )}
-          <MailList
-            mails={filteredMails}
-            onRemove={removeMail}
-            onMarkAsRead={markAsRead}
-          />
+         <div className="mail-list-container">
+        <MailList
+          mails={filteredMails}
+          onRemove={removeMail}
+          onMarkAsRead={markAsRead}
+          onToggleStarred={handleToggleStarred} 
+        />
+        </div>
+        <div className="mail-starred-container">
+        <MailStarred
+          mails={starredMails}
+          onToggleStarred={handleToggleStarred}
+        />
+      </div>
         </div>
       </div>
     </section>

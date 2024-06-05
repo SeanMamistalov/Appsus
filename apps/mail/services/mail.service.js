@@ -23,9 +23,8 @@ export const emailService = {
 };
 
 function getEmails() {
-  return Promise.resolve(emails);
+  return storageService.query(MAIL_KEY);
 }
-
 function sendEmail(email) {
   emails.push(email);
   return Promise.resolve(email);
@@ -77,6 +76,7 @@ function query(filterBy) {
       throw err;
     });
 }
+
 
 function markAsRead(mailId) {
   let mails = utilService.loadFromStorage("MAIL_KEY") || [];

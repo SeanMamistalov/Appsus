@@ -21,8 +21,10 @@
 }
 
 .checkbox-input {
-  margin-right: 3px;
+  margin-right: 10px;
+  margin-top: 20px;
 }
+
 .email-from-content {
   display: flex;
   align-items: center;
@@ -32,7 +34,11 @@
   margin-left: auto; 
 }
 
-.fa-solid.fa-star.starred {
+.fa-star {
+  cursor: pointer;
+}
+
+.fa-star.starred {
   color: gold;
 }
 
