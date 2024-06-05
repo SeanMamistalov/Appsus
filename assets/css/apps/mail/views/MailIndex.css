@@ -75,7 +75,7 @@
 @media only screen and (max-width: 600px) {
   .mail-index,
   .sidebar-gmail,
-  .sidebar-item {
+  .sidebar-item,.mail-content {
     max-width: 95%;
     padding: 0 10px;
   }

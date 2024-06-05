@@ -95,7 +95,10 @@ a {
 /* For mobile */
 @media only screen and (max-width: 600px) {
   .email-row,
-  .email-icons-container {
+  .email-icons-container,
+  .email-row-date,
+  .email-body-txt,
+  .email-body {
     max-width: 95%;
     padding: 0 10px;
   }

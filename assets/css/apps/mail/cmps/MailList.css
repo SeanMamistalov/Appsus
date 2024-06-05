@@ -11,13 +11,6 @@
   margin: 0;
 }
 
-.mail-list .loading,
-.mail-list .no-mails {
-  text-align: center;
-  padding: 20px;
-  color: var(--secondary-text-color);
-}
-
 .mail-list .mail-item {
   display: flex;
   align-items: center;
@@ -49,7 +42,7 @@
 
 /* For mobile */
 @media only screen and (max-width: 600px) {
-  .mail-list {
+  .mail-list, .mail-list ul {
     max-width: 95%;
     padding: 0 10px;
   }
