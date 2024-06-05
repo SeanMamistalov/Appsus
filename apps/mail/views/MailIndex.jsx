@@ -9,7 +9,7 @@ import { MailList } from "../cmps/MailList.jsx";
 import { EmailCompose } from "../views/MailCompose.jsx";
 import { EmailFilter } from "../cmps/MailFilter.jsx";
 import { MailStarred } from "../views/MailStarred.jsx";
-
+import { storageService } from "../../../services/async-storage.service.js";
 function getFilterFromSearchParams(searchParams) {
   const filter = {};
   for (const [key, value] of searchParams.entries()) {
@@ -32,15 +32,17 @@ export function MailIndex() {
   const [starredMails, setStarredMails] = useState([]);
 
   useEffect(() => {
+    console.log('Filter By:', filterBy);
     emailService
       .query(filterBy)
       .then((mails) => {
-        setMails(mails); // Set all mails
-        const starred = mails.filter(mail => mail.isStarred); // Filter starred mails
-        setStarredMails(starred); // Update starred mails state
+        setMails(mails); 
+        const starred = mails.filter(mail => mail.isStarred); 
+        setStarredMails(starred); 
       })
       .catch((err) => showErrorMsg("Failed to fetch mails"));
   }, [filterBy]);
+
   function onSetFilterBy(newFilter) {
     setFilterBy(newFilter);
   }
@@ -95,10 +97,10 @@ export function MailIndex() {
     });
 
     setMails(updatedMails);
-
     const updatedStarredMails = updatedMails.filter((mail) => mail.isStarred);
     setStarredMails(updatedStarredMails);
   };
+  
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -143,13 +145,13 @@ export function MailIndex() {
             <span className="material-symbols-outlined icon">create</span> Compose
           </button>
           <NavLink
-            className={({ isActive }) =>
+              className={({ isActive }) =>
               `sidebar-item inbox${isActive ? " active" : ""}`
             }
             to="/mail/inbox"
+            onClick={() => {setFilterBy({status:'inbox'})}}
           >
             <span className="material-symbols-outlined icon">inbox</span> Inbox {" "}
-
             {unreadMailsCount > 0 && `(${unreadMailsCount})`}
           </NavLink>
           <NavLink
@@ -157,6 +159,7 @@ export function MailIndex() {
               "sidebar-item starred" + (isActive ? " active" : "")
             }
             to="/mail/starred"
+            onClick={()=> {setFilterBy({status:'starred'})}}
           >
             <span className="material-symbols-outlined icon">star</span> Starred
 
@@ -166,6 +169,8 @@ export function MailIndex() {
               "sidebar-item sent" + (isActive ? " active" : "")
             }
             to="/mail/sentEmails"
+            onClick={()=> {setFilterBy({status:'sent'})}}
+
           >
             <span className="material-symbols-outlined icon">send</span> Sent
 
@@ -184,6 +189,8 @@ export function MailIndex() {
               "sidebar-item drafts" + (isActive ? " active" : "")
             }
             to="/mail/drafts"
+            onClick={()=> {setFilterBy({status:'draft'})}}
+
           >
             <span className="material-symbols-outlined icon">drafts</span> Drafts
           </NavLink>
@@ -214,12 +221,12 @@ export function MailIndex() {
           onToggleStarred={handleToggleStarred} 
         />
         </div>
-        <div className="mail-starred-container">
+        {/* <div className="mail-starred-container">
         <MailStarred
           mails={starredMails}
           onToggleStarred={handleToggleStarred}
         />
-      </div>
+      </div> */}
         </div>
       </div>
     </section>

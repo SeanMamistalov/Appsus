@@ -30,10 +30,10 @@ export function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/mail" element={<MailIndex />} />
                 <Route path="/mail/inbox" element={<MailIndex />} />
-                <Route path="/mail/starred" element={<MailStarred />} />
-                <Route path="/mail/sent" element={<MailSent />} />
-                <Route path="/mail/trash" element={<MailTrash />} />
-                <Route path="/mail/drafts" element={<MailDrafts />} />
+                <Route path="/mail/starred" element={<MailIndex />} />
+                <Route path="/mail/sent" element={<MailIndex />} />
+                <Route path="/mail/trash" element={<MailIndex />} />
+                <Route path="/mail/drafts" element={<MailIndex />} />
                 <Route path="/mail/:mailId" element={<EmailDetails />} />
                 <Route path="/note" element={<NoteIndex />} >
                 <Route index element={<Navigate to="/note/noteList" />} />

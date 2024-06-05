@@ -21,7 +21,7 @@ export function MailList({ mails, onRemove, onMarkAsRead, onToggleStarred }) {
           onMarkAsRead={onMarkAsRead}
           onToggleStarred={onToggleStarred}
         />
-                  </li>
+      </li>
         ))}
       </ul>
     </section>

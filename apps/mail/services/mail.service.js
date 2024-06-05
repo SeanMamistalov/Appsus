@@ -4,7 +4,6 @@ const MAIL_KEY = "emailDB";
 
 _createMails();
 const emails = [];
-
 export const emailService = {
   query,
   get,
@@ -51,24 +50,25 @@ function query(filterBy) {
     .then((mails) => {
       if (filterBy.status) {
         switch (filterBy.status) {
-          case "inbox":
-            mails = mails.filter((mail) => mail.to === gLoggedinUser.email);
-            break;
-          case "sent":
-            mails = mails.filter(
-              (mail) => mail.from === gLoggedinUser.email && mail.sentAt !== 0
-            );
-            break;
-          case "draft":
-            mails = mails.filter(
-              (mail) => mail.from === gLoggedinUser.email && !mail.removedAt
-            );
-            break;
+          // case "inbox":
+          //   mails = mails.filter((mail) => mail.to === gLoggedinUser.email);
+          //   break;
+          // case "sent":
+          //   mails = mails.filter(
+          //     (mail) => mail.from === gLoggedinUser.email && mail.sentAt !== 0
+          //   );
+          //   break;
+          // case "draft":
+          //   mails = mails.filter(
+          //     (mail) => mail.from === gLoggedinUser.email && !mail.removedAt
+          //   );
+          //   break;
           case "starred":
             mails = mails.filter((mail) => mail.isStarred);
             break;
         }
       }
+      console.log('mails', mails);
       return mails;
     })
     .catch((err) => {
