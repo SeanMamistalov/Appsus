@@ -29,19 +29,18 @@
 
 .email-details-icon:hover {
   border-radius: 50%;
-  background-color: #EAEBEF;
+  background-color: #eaebef;
 }
-
 
 .fa-arrow-left {
   margin-right: auto;
 }
 
-
-  /* For mobile */
-  @media only screen and (max-width: 600px) {
-    .email-details-container, .date-and-from-container {
-      max-width: 95%; 
-      padding: 0 10px; 
-    }
+/* For mobile */
+@media only screen and (max-width: 600px) {
+  .email-details-container,
+  .date-and-from-container {
+    max-width: 95%;
+    padding: 0 10px;
   }
+}

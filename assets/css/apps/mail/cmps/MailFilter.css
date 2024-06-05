@@ -1,13 +1,13 @@
 .mail-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color:#f6f8fc;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f6f8fc;
+}
+
 .menu-icon {
-    font-size: 24px;  
+  font-size: 24px;
   cursor: pointer;
   margin-right: 10px;
   font-size: 1.3rem;
@@ -17,62 +17,62 @@
 }
 
 .menu-icon:hover {
-    background-color: #ccc;
-border-radius: 50%;
+  background-color: #ccc;
+  border-radius: 50%;
 }
 
-  .gmail-logo {
-    max-width: 109px;
-    height: auto;
-  }
-  
-  .input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
+.gmail-logo {
+  max-width: 109px;
+  height: auto;
+}
 
-  .search-input {
-    border-radius: 2em;
-    background-color: #eaf1fb;
-    border: 1px solid #ccc;
-    padding: 1.2em;
-    padding-left: 3.3em;
-    width: 40em;
-    margin: 0 10px;
-  }
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-  .search-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #999;
-    margin-right: 15px;
-  }
-  .search-icon:hover {
-    background-color: #ccc;
-    cursor: pointer;
-    border-radius: 50%;
-  }
+.search-input {
+  border-radius: 2em;
+  background-color: #eaf1fb;
+  border: 1px solid #ccc;
+  padding: 1.2em;
+  padding-left: 3.3em;
+  width: 40em;
+  margin: 0 10px;
+}
 
-  .search-input:focus {
-    background-color: #ffff;
-  }
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  margin-right: 15px;
+}
+.search-icon:hover {
+  background-color: #ccc;
+  cursor: pointer;
+  border-radius: 50%;
+}
 
-  .user-img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-  }
+.search-input:focus {
+  background-color: #ffff;
+}
 
-  
-  /* For mobile */
-  @media only screen and (max-width: 600px) {
-    .search-input, .input-container, .mail-header {
-      max-width: 95%; 
-      padding: 0 10px; 
-    }
+.user-img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+}
+
+/* For mobile */
+@media only screen and (max-width: 600px) {
+  .search-input,
+  .input-container,
+  .mail-header {
+    max-width: 95%;
+    padding: 0 10px;
   }
+}

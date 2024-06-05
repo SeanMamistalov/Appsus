@@ -5,7 +5,7 @@
 }
 .sidebar-gmail .material-symbols-outlined icon {
   font-size: 15px;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .sidebar-item {
@@ -14,11 +14,11 @@
   padding: 8px 16px;
   color: #202124;
   text-decoration: none;
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 .sidebar-item:hover {
-  background-color: #f0f0f0; 
+  background-color: #f0f0f0;
   cursor: pointer;
 }
 
@@ -27,8 +27,6 @@
   border-right: 1px solid #ddd;
   padding: 16px;
 }
-
-
 
 .sidebar-item {
   display: flex;
@@ -50,7 +48,7 @@
 }
 
 .sidebar-gmail {
-  transform: translateX(-210px); 
+  transform: translateX(-210px);
   transition: transform 0.3s ease;
 }
 
@@ -63,7 +61,6 @@
   flex-direction: column;
 }
 
-
 .mail-content {
   display: flex;
   flex: 1;
@@ -74,11 +71,12 @@
   padding: 20px;
 }
 
-
-  /* For mobile */
-  @media only screen and (max-width: 600px) {
-    .mail-index, .sidebar-gmail, .sidebar-item{
-      max-width: 95%; 
-      padding: 0 10px; 
-    }
+/* For mobile */
+@media only screen and (max-width: 600px) {
+  .mail-index,
+  .sidebar-gmail,
+  .sidebar-item {
+    max-width: 95%;
+    padding: 0 10px;
   }
+}

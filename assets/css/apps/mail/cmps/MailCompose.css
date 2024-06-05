@@ -12,7 +12,7 @@
 }
 
 .compose-btn:hover {
-  background-color:#c2e7ff;
+  background-color: #c2e7ff;
   border: 2px solid #ddd;
 }
 
@@ -27,7 +27,6 @@
   bottom: 10px;
   right: 10px;
   z-index: 1000;
-  
 }
 
 .undo-btn,
@@ -52,10 +51,11 @@
   background-color: white;
   right: 1rem;
   bottom: 0;
-  box-shadow: 0 1px 2px 0 rgba(48, 51, 53, 0.35), 0 2px 6px 2px rgba(48, 51, 53, 0.25);
+  box-shadow: 0 1px 2px 0 rgba(48, 51, 53, 0.35),
+    0 2px 6px 2px rgba(48, 51, 53, 0.25);
   width: 600px;
   height: 630px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   z-index: 1000;
 }
 
@@ -63,7 +63,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #F2F6FC;
+  background-color: #f2f6fc;
   height: 20px;
   padding: 15px;
   color: #373737;
@@ -102,14 +102,14 @@
   border: 1px solid #ddd;
   border-radius: 0;
   box-sizing: border-box;
-  margin: 0; 
+  margin: 0;
 }
 
 .compose-modal-container textarea.compose-body {
   font-size: 18px;
   flex-grow: 0.85;
   resize: none;
-  margin: 0; 
+  margin: 0;
 }
 
 .line {
@@ -141,10 +141,14 @@
   background-color: #1465e9;
 }
 
-  /* For mobile */
-  @media only screen and (max-width: 600px) {
-    .compose-modal-container, .compose-header, .compose-btn, .compose-modal-container form, .form-lower-buttons button {
-      max-width: 95%; 
-      padding: 0 10px; 
-    }
+/* For mobile */
+@media only screen and (max-width: 600px) {
+  .compose-modal-container,
+  .compose-header,
+  .compose-btn,
+  .compose-modal-container form,
+  .form-lower-buttons button {
+    max-width: 95%;
+    padding: 0 10px;
   }
+}

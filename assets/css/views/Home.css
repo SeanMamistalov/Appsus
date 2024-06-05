@@ -17,7 +17,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
-} 
+}
 
 .home-view .hero p {
   font-size: 1.2em;
@@ -42,15 +42,16 @@
 
 .logo {
   width: 50%;
-  height: auto; 
-  margin-bottom: 20px; 
+  height: auto;
+  margin-bottom: 20px;
 }
 
-
-  /* For mobile */
-  @media only screen and (max-width: 600px) {
-    .home-view, .home-view .hero p, .logo {
-      max-width: 95%; 
-      padding: 0 10px; 
-    }
+/* For mobile */
+@media only screen and (max-width: 600px) {
+  .home-view,
+  .home-view .hero p,
+  .logo {
+    max-width: 95%;
+    padding: 0 10px;
   }
+}
