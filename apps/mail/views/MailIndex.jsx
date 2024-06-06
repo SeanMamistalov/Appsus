@@ -93,11 +93,11 @@ export function MailIndex() {
       if (mail.id === mailId) {
         return { ...mail, isStarred: !mail.isStarred };
       }
-      return mail;
+      return {...mail};
     });
 
     setMails(updatedMails);
-    emailService.save;
+    emailService.save(updatedMails.find((mail) => mail.id === mailId));
     const updatedStarredMails = updatedMails.filter((mail) => mail.isStarred);
     setStarredMails(updatedStarredMails);
   };
