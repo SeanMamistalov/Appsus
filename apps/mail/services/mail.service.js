@@ -106,6 +106,7 @@ function remove(mailId) {
 }
 
 function save(mail) {
+  if (!mail) return
   if (mail.id) {
     return storageService.put(MAIL_KEY, mail);
   } else {
